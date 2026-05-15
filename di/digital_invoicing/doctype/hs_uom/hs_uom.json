@@ -1,0 +1,53 @@
+{
+ "actions": [],
+ "autoname": "field:uom_name",
+ "creation": "2025-05-15 10:00:00.000000",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": ["uom_id", "uom_name"],
+ "fields": [
+  {
+   "fieldname": "uom_id",
+   "fieldtype": "Int",
+   "label": "UOM ID"
+  },
+  {
+   "fieldname": "uom_name",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "UOM Name",
+   "reqd": 1,
+   "unique": 1
+  }
+ ],
+ "links": [],
+ "modified": "2025-05-15 10:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "Digital Invoicing",
+ "name": "HS Uom",
+ "naming_rule": "By fieldname",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "read": 1,
+   "role": "All"
+  }
+ ],
+ "quick_entry": 1,
+ "sort_field": "uom_name",
+ "sort_order": "ASC",
+ "states": [],
+ "title_field": "uom_name",
+ "track_changes": 0
+}

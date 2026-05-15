@@ -1,0 +1,29 @@
+{
+ "actions": [],
+ "creation": "2025-05-15 10:00:00.000000",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": ["scenario"],
+ "fields": [
+  {
+   "fieldname": "scenario",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Scenario",
+   "options": "Sandbox Scenario",
+   "reqd": 1
+  }
+ ],
+ "istable": 1,
+ "links": [],
+ "modified": "2025-05-15 10:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "Digital Invoicing",
+ "name": "Company Sandbox Scenario",
+ "owner": "Administrator",
+ "permissions": [],
+ "sort_field": "creation",
+ "sort_order": "ASC",
+ "states": [],
+ "track_changes": 0
+}

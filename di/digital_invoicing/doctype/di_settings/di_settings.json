@@ -1,0 +1,250 @@
+{
+ "actions": [],
+ "autoname": "field:company",
+ "creation": "2025-05-15 10:00:00.000000",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "general_tab",
+  "enabled",
+  "company",
+  "column_break_general",
+  "sync_mode",
+  "auto_post_on_submit",
+  "di_api_tab",
+  "di_api_section",
+  "access_token",
+  "pos_fiscal_tab",
+  "pos_fiscal_section",
+  "enable_pos_fiscal",
+  "pos_id",
+  "column_break_pos",
+  "pos_bearer_token",
+  "pos_environment",
+  "company_info_tab",
+  "company_info_section",
+  "ntn_cnic",
+  "strn_no",
+  "column_break_company",
+  "province",
+  "address",
+  "sale_types_tab",
+  "sale_types",
+  "scenarios_tab",
+  "scenarios",
+  "reference_data_tab",
+  "reference_data_section",
+  "sync_provinces_html",
+  "sync_hs_codes_html"
+ ],
+ "fields": [
+  {
+   "fieldname": "general_tab",
+   "fieldtype": "Tab Break",
+   "label": "General"
+  },
+  {
+   "default": "0",
+   "fieldname": "enabled",
+   "fieldtype": "Check",
+   "in_list_view": 1,
+   "label": "Enable Digital Invoicing"
+  },
+  {
+   "fieldname": "company",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Company",
+   "options": "Company",
+   "reqd": 1,
+   "unique": 1
+  },
+  {
+   "fieldname": "column_break_general",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "Sandbox",
+   "fieldname": "sync_mode",
+   "fieldtype": "Select",
+   "label": "Sync Mode",
+   "options": "Production\nSandbox"
+  },
+  {
+   "default": "1",
+   "fieldname": "auto_post_on_submit",
+   "fieldtype": "Check",
+   "label": "Auto Post on Submit"
+  },
+  {
+   "fieldname": "di_api_tab",
+   "fieldtype": "Tab Break",
+   "label": "DI API"
+  },
+  {
+   "fieldname": "di_api_section",
+   "fieldtype": "Section Break",
+   "label": "DI API Configuration"
+  },
+  {
+   "fieldname": "access_token",
+   "fieldtype": "Password",
+   "label": "Access Token (Bearer)"
+  },
+  {
+   "fieldname": "pos_fiscal_tab",
+   "fieldtype": "Tab Break",
+   "label": "POS Fiscal"
+  },
+  {
+   "fieldname": "pos_fiscal_section",
+   "fieldtype": "Section Break",
+   "label": "POS Fiscal Configuration"
+  },
+  {
+   "default": "0",
+   "fieldname": "enable_pos_fiscal",
+   "fieldtype": "Check",
+   "label": "Enable POS Fiscal"
+  },
+  {
+   "depends_on": "eval:doc.enable_pos_fiscal",
+   "fieldname": "pos_id",
+   "fieldtype": "Data",
+   "label": "FBR POS ID"
+  },
+  {
+   "fieldname": "column_break_pos",
+   "fieldtype": "Column Break"
+  },
+  {
+   "depends_on": "eval:doc.enable_pos_fiscal",
+   "fieldname": "pos_bearer_token",
+   "fieldtype": "Password",
+   "label": "POS Bearer Token"
+  },
+  {
+   "default": "Sandbox",
+   "depends_on": "eval:doc.enable_pos_fiscal",
+   "fieldname": "pos_environment",
+   "fieldtype": "Select",
+   "label": "POS Environment",
+   "options": "Sandbox\nProduction"
+  },
+  {
+   "fieldname": "company_info_tab",
+   "fieldtype": "Tab Break",
+   "label": "Company Info"
+  },
+  {
+   "fieldname": "company_info_section",
+   "fieldtype": "Section Break",
+   "label": "Company Information"
+  },
+  {
+   "fieldname": "ntn_cnic",
+   "fieldtype": "Data",
+   "label": "NTN / CNIC"
+  },
+  {
+   "fieldname": "strn_no",
+   "fieldtype": "Data",
+   "label": "STRN No"
+  },
+  {
+   "fieldname": "column_break_company",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "province",
+   "fieldtype": "Link",
+   "label": "Province",
+   "options": "Province"
+  },
+  {
+   "fieldname": "address",
+   "fieldtype": "Data",
+   "label": "Address"
+  },
+  {
+   "fieldname": "sale_types_tab",
+   "fieldtype": "Tab Break",
+   "label": "Sale Types"
+  },
+  {
+   "fieldname": "sale_types",
+   "fieldtype": "Table",
+   "label": "Company Sale Types",
+   "options": "Company Sale Type"
+  },
+  {
+   "fieldname": "scenarios_tab",
+   "fieldtype": "Tab Break",
+   "label": "Sandbox Scenarios"
+  },
+  {
+   "fieldname": "scenarios",
+   "fieldtype": "Table",
+   "label": "Sandbox Scenarios",
+   "options": "Company Sandbox Scenario"
+  },
+  {
+   "fieldname": "reference_data_tab",
+   "fieldtype": "Tab Break",
+   "label": "Reference Data"
+  },
+  {
+   "fieldname": "reference_data_section",
+   "fieldtype": "Section Break",
+   "label": "Sync Reference Data from FBR"
+  },
+  {
+   "fieldname": "sync_provinces_html",
+   "fieldtype": "HTML",
+   "label": "Sync Buttons",
+   "options": "<p class=\"text-muted\">Use the buttons in the toolbar to sync reference data from FBR APIs.</p>"
+  },
+  {
+   "fieldname": "sync_hs_codes_html",
+   "fieldtype": "HTML",
+   "label": " "
+  }
+ ],
+ "links": [
+  {
+   "link_doctype": "DI Log",
+   "link_fieldname": "document_type"
+  }
+ ],
+ "modified": "2025-05-15 10:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "Digital Invoicing",
+ "name": "DI Settings",
+ "naming_rule": "By fieldname",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "read": 1,
+   "role": "Accounts Manager",
+   "write": 1
+  }
+ ],
+ "search_fields": "company",
+ "sort_field": "company",
+ "sort_order": "ASC",
+ "states": [],
+ "title_field": "company",
+ "track_changes": 1
+}

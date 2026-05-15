@@ -1,0 +1,52 @@
+{
+ "actions": [],
+ "autoname": "field:sro_desc",
+ "creation": "2025-05-15 10:00:00.000000",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": ["sro_id", "sro_desc"],
+ "fields": [
+  {
+   "fieldname": "sro_id",
+   "fieldtype": "Int",
+   "in_list_view": 1,
+   "label": "SRO ID"
+  },
+  {
+   "fieldname": "sro_desc",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "SRO Description",
+   "reqd": 1,
+   "unique": 1
+  }
+ ],
+ "links": [],
+ "modified": "2025-05-15 10:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "Digital Invoicing",
+ "name": "SRO Schedule",
+ "naming_rule": "By fieldname",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "export": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "write": 1
+  },
+  {
+   "read": 1,
+   "role": "All"
+  }
+ ],
+ "quick_entry": 1,
+ "sort_field": "sro_desc",
+ "sort_order": "ASC",
+ "states": [],
+ "title_field": "sro_desc",
+ "track_changes": 0
+}

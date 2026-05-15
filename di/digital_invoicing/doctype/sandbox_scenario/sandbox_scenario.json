@@ -1,0 +1,59 @@
+{
+ "actions": [],
+ "autoname": "field:scenario_id",
+ "creation": "2025-05-15 10:00:00.000000",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": ["scenario_id", "description", "sale_type"],
+ "fields": [
+  {
+   "fieldname": "scenario_id",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Scenario ID",
+   "reqd": 1,
+   "unique": 1
+  },
+  {
+   "fieldname": "description",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Description"
+  },
+  {
+   "fieldname": "sale_type",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Sale Type",
+   "options": "Sale Type"
+  }
+ ],
+ "links": [],
+ "modified": "2025-05-15 10:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "Digital Invoicing",
+ "name": "Sandbox Scenario",
+ "naming_rule": "By fieldname",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "export": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "write": 1
+  },
+  {
+   "read": 1,
+   "role": "All"
+  }
+ ],
+ "quick_entry": 1,
+ "sort_field": "scenario_id",
+ "sort_order": "ASC",
+ "states": [],
+ "title_field": "scenario_id",
+ "track_changes": 0
+}
