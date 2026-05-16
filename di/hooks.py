@@ -11,15 +11,14 @@ app_license = "mit"
 required_apps = ["erpnext"]
 
 # Each item in the list will be shown as an app in the apps page
-# add_to_apps_screen = [
-# 	{
-# 		"name": "di",
-# 		"logo": "/assets/di/logo.png",
-# 		"title": "Digital Invoicing",
-# 		"route": "/di",
-# 		"has_permission": "di.api.permission.has_app_permission"
-# 	}
-# ]
+add_to_apps_screen = [
+	{
+		"name": "di",
+		"logo": "/assets/di/images/di-logo.png",
+		"title": "Digital Invoicing",
+		"route": "/app/digital-invoicing",
+	}
+]
 
 # Includes in <head>
 # ------------------
