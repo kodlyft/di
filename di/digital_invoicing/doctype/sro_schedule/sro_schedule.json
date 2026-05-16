@@ -1,10 +1,14 @@
 {
  "actions": [],
  "autoname": "field:sro_desc",
- "creation": "2025-05-15 10:00:00.000000",
+ "creation": "2025-05-15 10:00:00",
  "doctype": "DocType",
  "engine": "InnoDB",
- "field_order": ["sro_id", "sro_desc"],
+ "field_order": [
+  "sro_id",
+  "column_break_nvov",
+  "sro_desc"
+ ],
  "fields": [
   {
    "fieldname": "sro_id",
@@ -19,10 +23,14 @@
    "label": "SRO Description",
    "reqd": 1,
    "unique": 1
+  },
+  {
+   "fieldname": "column_break_nvov",
+   "fieldtype": "Column Break"
   }
  ],
  "links": [],
- "modified": "2025-05-15 10:00:00.000000",
+ "modified": "2026-05-16 17:19:12.673424",
  "modified_by": "Administrator",
  "module": "Digital Invoicing",
  "name": "SRO Schedule",
@@ -44,9 +52,10 @@
   }
  ],
  "quick_entry": 1,
+ "row_format": "Dynamic",
  "sort_field": "sro_desc",
  "sort_order": "ASC",
  "states": [],
  "title_field": "sro_desc",
- "track_changes": 0
+ "track_changes": 1
 }

@@ -1,7 +1,7 @@
 {
  "actions": [],
  "autoname": "field:company",
- "creation": "2025-05-15 10:00:00.000000",
+ "creation": "2025-05-15 10:00:00",
  "doctype": "DocType",
  "engine": "InnoDB",
  "field_order": [
@@ -216,7 +216,7 @@
    "link_fieldname": "document_type"
   }
  ],
- "modified": "2025-05-15 10:00:00.000000",
+ "modified": "2026-05-16 17:18:41.625982",
  "modified_by": "Administrator",
  "module": "Digital Invoicing",
  "name": "DI Settings",
@@ -241,6 +241,7 @@
    "write": 1
   }
  ],
+ "row_format": "Dynamic",
  "search_fields": "company",
  "sort_field": "company",
  "sort_order": "ASC",

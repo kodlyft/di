@@ -1,10 +1,15 @@
 {
  "actions": [],
  "autoname": "field:error_code",
- "creation": "2025-05-15 10:00:00.000000",
+ "creation": "2025-05-15 10:00:00",
  "doctype": "DocType",
  "engine": "InnoDB",
- "field_order": ["error_code", "category", "message", "description"],
+ "field_order": [
+  "error_code",
+  "category",
+  "message",
+  "description"
+ ],
  "fields": [
   {
    "fieldname": "error_code",
@@ -33,8 +38,9 @@
    "label": "Description"
   }
  ],
+ "in_create": 1,
  "links": [],
- "modified": "2025-05-15 10:00:00.000000",
+ "modified": "2026-05-16 17:19:38.691819",
  "modified_by": "Administrator",
  "module": "Digital Invoicing",
  "name": "DI Error Code",
@@ -55,10 +61,10 @@
    "role": "All"
   }
  ],
+ "row_format": "Dynamic",
  "search_fields": "message",
  "sort_field": "error_code",
  "sort_order": "ASC",
  "states": [],
- "title_field": "error_code",
- "track_changes": 0
+ "title_field": "error_code"
 }
