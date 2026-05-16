@@ -173,14 +173,15 @@
 
 	<!-- FBR Section (only if posted) -->
 	{% if doc.is_di_posted and doc.di_integration_id %}
+	{% set di_qr = generate_qr_code(doc.di_integration_id) %}
 	<div class="di-fbr-section">
-		{% if doc.di_qr_code %}
+		{% if di_qr %}
 		<div>
-			<img src="{{ doc.di_qr_code }}" class="di-qr-code" alt="FBR QR Code" />
+			<img src="{{ di_qr }}" class="di-qr-code" alt="FBR QR Code" />
 		</div>
 		{% endif %}
 		<div class="di-fbr-info">
-			{% set fbr_logo = frappe.get_attr("di.integrations.qr_code.get_fbr_logo_data_uri")() %}
+			{% set fbr_logo = get_fbr_logo_data_uri() %}
 			{% if fbr_logo %}
 			<img src="{{ fbr_logo }}" style="height:30px;margin-bottom:5px;" alt="FBR Logo" />
 			{% endif %}

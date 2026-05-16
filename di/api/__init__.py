@@ -79,6 +79,16 @@ def sync_reference_data(data_type, **kwargs):
 
 
 @frappe.whitelist()
+def get_qr_code(integration_id):
+	"""Generate FBR QR code at runtime for a given integration ID."""
+	from di.integrations.qr_code import generate_qr_code
+
+	if not integration_id:
+		return ""
+	return generate_qr_code(integration_id)
+
+
+@frappe.whitelist()
 @frappe.validate_and_sanitize_search_inputs
 def get_sale_types_for_company(doctype, txt, searchfield, start, page_len, filters):
 	"""Query filter for sale type dropdown - returns only company-configured types."""

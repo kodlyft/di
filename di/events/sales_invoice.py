@@ -25,7 +25,6 @@ def before_submit(doc, method=None):
 			from di.integrations.pos_fiscal import fiscalize_invoice
 
 			fiscalize_invoice(doc)
-			_generate_qr(doc)
 			return
 		return
 
@@ -38,7 +37,6 @@ def before_submit(doc, method=None):
 		from di.integrations.di_api import post_invoice
 
 		post_invoice(doc)
-		_generate_qr(doc)
 
 
 def _validate_di_items(doc):
@@ -74,11 +72,3 @@ def _validate_pos_items(doc):
 					"Row {0}: Item {1} is missing Customs Tariff Number (PCT Code) required for FBR POS."
 				).format(item.idx, item.item_name)
 			)
-
-
-def _generate_qr(doc):
-	"""Generate QR code if invoice was posted successfully."""
-	if doc.di_integration_id and not doc.di_qr_code:
-		from di.integrations.qr_code import generate_qr_code
-
-		doc.di_qr_code = generate_qr_code(doc.di_integration_id)

@@ -165,21 +165,11 @@ def setup_custom_fields():
 				read_only=1,
 			),
 			dict(
-				fieldname="di_qr_code",
-				label="DI QR Code",
-				fieldtype="Long Text",
-				insert_after="di_invoice_type",
-				read_only=1,
-				hidden=1,
-			),
-			dict(
 				fieldname="di_scenario_id",
 				label="Sandbox Scenario",
 				fieldtype="Link",
 				options="Sandbox Scenario",
-				insert_after="di_qr_code",
-				depends_on="eval:false",
-				hidden=1,
+				insert_after="di_invoice_type",
 			),
 		],
 		"Sales Invoice Item": [

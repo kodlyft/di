@@ -237,7 +237,15 @@ def _make_request(url, payload, token):
 		frappe.throw(_("FBR API returned 401 Unauthorized. Check your access token."))
 	if response.status_code == 500:
 		frappe.throw(_("FBR API returned 500 Internal Server Error. Contact FBR administrator."))
-	return response.json()
+	try:
+		return response.json()
+	except requests.exceptions.JSONDecodeError:
+		import json
+		import re
+
+		# FBR API sometimes returns JSON with trailing commas
+		text = re.sub(r",\s*([}\]])", r"\1", response.text)
+		return json.loads(text)
 
 
 def _is_valid_response(response):
@@ -246,21 +254,16 @@ def _is_valid_response(response):
 
 
 def _handle_success(doc, payload, response, invoice_number, resync):
-	from di.integrations.qr_code import generate_qr_code
-
 	dated = response.get("dated", now())
 
 	if resync:
 		doc.db_set("di_integration_id", invoice_number, update_modified=False)
 		doc.db_set("is_di_posted", 1, update_modified=False)
 		doc.db_set("di_posting_datetime", dated, update_modified=False)
-		qr = generate_qr_code(invoice_number)
-		doc.db_set("di_qr_code", qr, update_modified=False)
 	else:
 		doc.di_integration_id = invoice_number
 		doc.is_di_posted = 1
 		doc.di_posting_datetime = dated
-		doc.di_qr_code = generate_qr_code(invoice_number)
 
 	create_log(
 		doc.doctype,
