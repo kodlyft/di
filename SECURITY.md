@@ -7,6 +7,7 @@ and credentials used to communicate with FBR services.
 
 | Version / Branch      | Supported |
 | --------------------- | --------- |
+| `version-16`          | Yes       |
 | `develop`             | Yes       |
 | Latest tagged release | Yes       |
 | Older releases        | No        |

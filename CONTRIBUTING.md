@@ -48,9 +48,12 @@ and release-facing changes.
 
 ### Setup
 
+Clone the branch you intend to target. The example below uses the v16 stable
+branch.
+
 ```bash
 cd $PATH_TO_YOUR_BENCH
-bench get-app https://github.com/kodlyft/di --branch develop
+bench get-app https://github.com/kodlyft/di --branch version-16
 bench setup requirements
 bench --site your-site install-app di
 
@@ -58,6 +61,9 @@ cd apps/di
 pip install pre-commit
 pre-commit install
 ```
+
+If you are contributing unreleased feature work, switch the `bench get-app`
+branch argument to `develop` before starting.
 
 `pre-commit install` is required if you want formatting and lint fixes to run automatically before each commit.
 
