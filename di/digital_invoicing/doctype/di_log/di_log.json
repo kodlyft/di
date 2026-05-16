@@ -1,7 +1,7 @@
 {
  "actions": [],
  "autoname": "hash",
- "creation": "2025-05-15 10:00:00.000000",
+ "creation": "2025-05-15 10:00:00",
  "doctype": "DocType",
  "engine": "InnoDB",
  "field_order": [
@@ -104,8 +104,9 @@
    "label": "Error Message"
   }
  ],
+ "in_create": 1,
  "links": [],
- "modified": "2025-05-15 10:00:00.000000",
+ "modified": "2026-05-16 17:11:19.303673",
  "modified_by": "Administrator",
  "module": "Digital Invoicing",
  "name": "DI Log",
@@ -126,10 +127,10 @@
    "role": "Accounts User"
   }
  ],
+ "row_format": "Dynamic",
  "search_fields": "document_type,document_name,status",
  "sort_field": "creation",
  "sort_order": "DESC",
  "states": [],
- "title_field": "title",
- "track_changes": 0
+ "title_field": "title"
 }

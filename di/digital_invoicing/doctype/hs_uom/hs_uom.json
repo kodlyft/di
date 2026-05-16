@@ -1,10 +1,14 @@
 {
  "actions": [],
  "autoname": "field:uom_name",
- "creation": "2025-05-15 10:00:00.000000",
+ "creation": "2025-05-15 10:00:00",
  "doctype": "DocType",
  "engine": "InnoDB",
- "field_order": ["uom_id", "uom_name"],
+ "field_order": [
+  "uom_id",
+  "column_break_bwws",
+  "uom_name"
+ ],
  "fields": [
   {
    "fieldname": "uom_id",
@@ -18,10 +22,14 @@
    "label": "UOM Name",
    "reqd": 1,
    "unique": 1
+  },
+  {
+   "fieldname": "column_break_bwws",
+   "fieldtype": "Column Break"
   }
  ],
  "links": [],
- "modified": "2025-05-15 10:00:00.000000",
+ "modified": "2026-05-16 17:12:08.763844",
  "modified_by": "Administrator",
  "module": "Digital Invoicing",
  "name": "HS Uom",
@@ -45,9 +53,10 @@
   }
  ],
  "quick_entry": 1,
+ "row_format": "Dynamic",
  "sort_field": "uom_name",
  "sort_order": "ASC",
  "states": [],
  "title_field": "uom_name",
- "track_changes": 0
+ "track_changes": 1
 }

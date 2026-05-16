@@ -5,6 +5,25 @@ from frappe.model.document import Document
 
 
 class DILog(Document):
+	# begin: auto-generated types
+	# This code is auto-generated. Do not modify anything in this block.
+
+	from typing import TYPE_CHECKING
+
+	if TYPE_CHECKING:
+		from frappe.types import DF
+
+		api_type: DF.Literal["DI Post", "DI Validate", "POS Fiscal", "Reference", "STATL"]
+		document_name: DF.DynamicLink | None
+		document_type: DF.Link | None
+		error_code: DF.Data | None
+		error_message: DF.LongText | None
+		fbr_invoice_number: DF.Data | None
+		payload: DF.Code | None
+		response: DF.Code | None
+		status: DF.Literal["Success", "Error"]
+		title: DF.Data | None
+	# end: auto-generated types
 	pass
 
 
