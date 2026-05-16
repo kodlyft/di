@@ -45,12 +45,13 @@ def verify_buyer(customer):
 
 @frappe.whitelist()
 def sync_reference_data(data_type, **kwargs):
-	"""Trigger reference data sync from FBR."""
+	"""Trigger reference data sync from FBR in the background."""
 	from di.integrations import reference_api
 
 	sync_map = {
 		"provinces": reference_api.sync_provinces,
 		"hs_codes": reference_api.sync_hs_codes,
+		"hs_code_uoms": reference_api.sync_hs_code_uoms,
 		"uoms": reference_api.sync_uoms,
 		"transaction_types": reference_api.sync_transaction_types,
 		"sro_item_codes": reference_api.sync_sro_item_codes,
@@ -62,7 +63,19 @@ def sync_reference_data(data_type, **kwargs):
 
 	supported_params = signature(func).parameters
 	filtered_kwargs = {key: value for key, value in kwargs.items() if key in supported_params}
-	return func(**filtered_kwargs)
+
+	frappe.enqueue(
+		func,
+		queue="default",
+		job_id=f"sync_reference_data_{data_type}",
+		deduplicate=True,
+		**filtered_kwargs,
+	)
+
+	frappe.msgprint(
+		_("Syncing {0} in background. You will be notified on completion.").format(data_type),
+		alert=True,
+	)
 
 
 @frappe.whitelist()

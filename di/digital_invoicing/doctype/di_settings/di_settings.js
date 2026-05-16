@@ -26,6 +26,7 @@ function di_settings_add_sync_buttons(frm) {
 	let sync_types = [
 		{ label: __("Sync Provinces"), data_type: "provinces" },
 		{ label: __("Sync HS Codes"), data_type: "hs_codes" },
+		{ label: __("Sync HS Code UOMs"), data_type: "hs_code_uoms" },
 		{ label: __("Sync UOMs"), data_type: "uoms" },
 		{ label: __("Sync Transaction Types"), data_type: "transaction_types" },
 		{ label: __("Sync SRO Item Codes"), data_type: "sro_item_codes" },
@@ -33,14 +34,13 @@ function di_settings_add_sync_buttons(frm) {
 
 	sync_types.forEach(({ label, data_type }) => {
 		frm.add_custom_button(label, () => {
-			frappe.show_alert({ message: __("Syncing {0}...", [data_type]), indicator: "blue" });
 			frappe.xcall("di.api.sync_reference_data", {
 				data_type: data_type,
 				company: frm.doc.company,
-			}).then((result) => {
+			}).then(() => {
 				frappe.show_alert({
-					message: result.message || __("Sync complete"),
-					indicator: "green",
+					message: __("Syncing {0} in background", [data_type]),
+					indicator: "blue",
 				});
 			}).catch((err) => {
 				frappe.show_alert({

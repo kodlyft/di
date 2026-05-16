@@ -25,6 +25,7 @@
   "company_info_section",
   "ntn_cnic",
   "strn_no",
+  "annexure_id",
   "column_break_company",
   "province",
   "address",
@@ -208,6 +209,11 @@
    "fieldname": "sync_hs_codes_html",
    "fieldtype": "HTML",
    "label": " "
+  },
+  {
+   "fieldname": "annexure_id",
+   "fieldtype": "Data",
+   "label": "Sales Annexure ID"
   }
  ],
  "links": [
@@ -216,7 +222,7 @@
    "link_fieldname": "document_type"
   }
  ],
- "modified": "2026-05-16 17:18:41.625982",
+ "modified": "2026-05-16 19:19:32.399896",
  "modified_by": "Administrator",
  "module": "Digital Invoicing",
  "name": "DI Settings",

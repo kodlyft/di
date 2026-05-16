@@ -1,9 +1,0 @@
-[
- {"docstatus": 0, "doctype": "Province", "name": "PUNJAB", "province_code": 7, "province_name": "PUNJAB"},
- {"docstatus": 0, "doctype": "Province", "name": "SINDH", "province_code": 8, "province_name": "SINDH"},
- {"docstatus": 0, "doctype": "Province", "name": "BALOCHISTAN", "province_code": 9, "province_name": "BALOCHISTAN"},
- {"docstatus": 0, "doctype": "Province", "name": "KHYBER PAKHTUNKHWA", "province_code": 10, "province_name": "KHYBER PAKHTUNKHWA"},
- {"docstatus": 0, "doctype": "Province", "name": "CAPITAL TERRITORY", "province_code": 11, "province_name": "CAPITAL TERRITORY"},
- {"docstatus": 0, "doctype": "Province", "name": "AZAD JAMMU AND KASHMIR", "province_code": 12, "province_name": "AZAD JAMMU AND KASHMIR"},
- {"docstatus": 0, "doctype": "Province", "name": "GILGIT BALTISTAN", "province_code": 13, "province_name": "GILGIT BALTISTAN"}
-]

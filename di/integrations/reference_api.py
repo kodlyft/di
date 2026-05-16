@@ -81,6 +81,22 @@ def sync_hs_codes(company=None):
 
 
 @frappe.whitelist()
+def sync_hs_code_uoms(company=None):
+	"""Sync HS codes UOMs from FBR API."""
+	token = _get_token(company)
+	di_settings = frappe.get_doc("DI Settings", company)
+	for hs_code in frappe.get_list("HS Code"):
+		url = f"{REF_BASE_V1}/HS_UOM?hs_code={hs_code.name}&annexureId={di_settings.annexure_id}"
+		data = _make_get_request(url, token, "HS Code Uoms")
+		for item in data:
+			doc = frappe.get_doc("HS Code", hs_code)
+			doc.uom = item.get("description")
+			doc.save(ignore_permissions=True)
+
+	return {"message": _("HS Code UOMs synced")}
+
+
+@frappe.whitelist()
 def sync_uoms(company=None):
 	"""Sync UOMs from FBR API."""
 	token = _get_token(company)

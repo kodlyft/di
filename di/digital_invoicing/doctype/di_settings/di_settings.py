@@ -16,6 +16,7 @@ class DISettings(Document):
 
 		access_token: DF.Password | None
 		address: DF.Data | None
+		annexure_id: DF.Data | None
 		auto_post_on_submit: DF.Check
 		company: DF.Link
 		enable_pos_fiscal: DF.Check
