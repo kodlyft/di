@@ -24,7 +24,7 @@ submit, validate, and track tax-compliant invoices inside their ERP workflow.
 | Python           | >= 3.10   |
 | Frappe Framework | >= 15.0.0 |
 | ERPNext          | >= 15.0.0 |
-| qrcode           | >= 7.4    |
+| qrcode           | >= 8.2    |
 
 ## Installation
 

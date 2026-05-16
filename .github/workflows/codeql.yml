@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - develop
+      - version-15
   pull_request:
   schedule:
     - cron: "17 3 * * 1"
