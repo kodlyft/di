@@ -1,10 +1,14 @@
 {
  "actions": [],
  "autoname": "field:sale_type_name",
- "creation": "2025-05-15 10:00:00.000000",
+ "creation": "2025-05-15 10:00:00",
  "doctype": "DocType",
  "engine": "InnoDB",
- "field_order": ["sale_type_name", "requires_sro"],
+ "field_order": [
+  "sale_type_name",
+  "column_break_npxx",
+  "requires_sro"
+ ],
  "fields": [
   {
    "fieldname": "sale_type_name",
@@ -19,10 +23,14 @@
    "fieldname": "requires_sro",
    "fieldtype": "Check",
    "label": "Requires SRO"
+  },
+  {
+   "fieldname": "column_break_npxx",
+   "fieldtype": "Column Break"
   }
  ],
  "links": [],
- "modified": "2025-05-15 10:00:00.000000",
+ "modified": "2026-05-16 17:16:23.899607",
  "modified_by": "Administrator",
  "module": "Digital Invoicing",
  "name": "Sale Type",
@@ -46,9 +54,10 @@
   }
  ],
  "quick_entry": 1,
+ "row_format": "Dynamic",
  "sort_field": "sale_type_name",
  "sort_order": "ASC",
  "states": [],
  "title_field": "sale_type_name",
- "track_changes": 0
+ "track_changes": 1
 }

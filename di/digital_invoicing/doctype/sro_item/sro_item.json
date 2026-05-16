@@ -1,10 +1,15 @@
 {
  "actions": [],
  "autoname": "hash",
- "creation": "2025-05-15 10:00:00.000000",
+ "creation": "2025-05-15 10:00:00",
  "doctype": "DocType",
  "engine": "InnoDB",
- "field_order": ["sro_item_id", "sro_item_desc", "sro_schedule"],
+ "field_order": [
+  "sro_item_id",
+  "sro_item_desc",
+  "column_break_pput",
+  "sro_schedule"
+ ],
  "fields": [
   {
    "fieldname": "sro_item_id",
@@ -24,10 +29,14 @@
    "in_list_view": 1,
    "label": "SRO Schedule",
    "options": "SRO Schedule"
+  },
+  {
+   "fieldname": "column_break_pput",
+   "fieldtype": "Column Break"
   }
  ],
  "links": [],
- "modified": "2025-05-15 10:00:00.000000",
+ "modified": "2026-05-16 17:15:54.834855",
  "modified_by": "Administrator",
  "module": "Digital Invoicing",
  "name": "SRO Item",
@@ -48,8 +57,9 @@
    "role": "All"
   }
  ],
+ "row_format": "Dynamic",
  "sort_field": "sro_item_id",
  "sort_order": "ASC",
  "states": [],
- "track_changes": 0
+ "track_changes": 1
 }

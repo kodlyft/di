@@ -1,10 +1,14 @@
 {
  "actions": [],
  "autoname": "field:hs_code",
- "creation": "2025-05-15 10:00:00.000000",
+ "creation": "2025-05-15 10:00:00",
  "doctype": "DocType",
  "engine": "InnoDB",
- "field_order": ["hs_code", "description", "uom"],
+ "field_order": [
+  "hs_code",
+  "description",
+  "uom"
+ ],
  "fields": [
   {
    "fieldname": "hs_code",
@@ -27,7 +31,7 @@
   }
  ],
  "links": [],
- "modified": "2025-05-15 10:00:00.000000",
+ "modified": "2026-05-16 17:14:11.996913",
  "modified_by": "Administrator",
  "module": "Digital Invoicing",
  "name": "HS Code",
@@ -50,10 +54,11 @@
    "role": "All"
   }
  ],
+ "row_format": "Dynamic",
  "search_fields": "description",
  "sort_field": "hs_code",
  "sort_order": "ASC",
  "states": [],
  "title_field": "hs_code",
- "track_changes": 0
+ "track_changes": 1
 }
