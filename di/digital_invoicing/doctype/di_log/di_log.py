@@ -24,6 +24,7 @@ class DILog(Document):
 		status: DF.Literal["Success", "Error"]
 		title: DF.Data | None
 	# end: auto-generated types
+
 	pass
 
 

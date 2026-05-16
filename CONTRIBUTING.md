@@ -30,7 +30,7 @@ and release-facing changes.
 ### Submit Pull Requests
 
 1. Fork the repository.
-2. Branch from `develop` for new work, or from `version-15` for a stable-branch hotfix.
+2. Branch from `develop` for new work, or from `version-16` for a stable-branch hotfix.
 3. Keep each pull request focused on one change area.
 4. Add or update tests when behavior changes.
 5. Run the required checks locally before opening the PR.
@@ -128,9 +128,9 @@ bench build
 ## Branch Strategy
 
 - `develop` is the active development branch.
-- `version-15` is the Frappe v15 stable branch.
-- Merge feature work into `develop` first, then forward-port or cherry-pick to `version-15` as needed.
-- Merge hotfixes created on `version-15` back into `develop` so the branches do not drift.
+- `version-16` is the Frappe v16 stable branch.
+- Merge feature work into `develop` first, then forward-port or cherry-pick to `version-16` as needed.
+- Merge hotfixes created on `version-16` back into `develop` so the branches do not drift.
 
 ## Release Notes
 

@@ -16,4 +16,5 @@ class CompanySandboxScenario(Document):
 		parenttype: DF.Data
 		scenario: DF.Link
 	# end: auto-generated types
+
 	pass

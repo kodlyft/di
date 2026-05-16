@@ -15,4 +15,5 @@ class HSCode(Document):
 		hs_code: DF.Data
 		uom: DF.Link | None
 	# end: auto-generated types
+
 	pass

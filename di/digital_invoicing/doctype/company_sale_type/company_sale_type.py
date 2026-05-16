@@ -16,4 +16,5 @@ class CompanySaleType(Document):
 		parenttype: DF.Data
 		sale_type: DF.Link
 	# end: auto-generated types
+
 	pass

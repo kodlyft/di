@@ -14,4 +14,5 @@ class SROSchedule(Document):
 		sro_desc: DF.Data
 		sro_id: DF.Int
 	# end: auto-generated types
+
 	pass

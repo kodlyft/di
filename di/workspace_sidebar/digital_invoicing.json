@@ -1,0 +1,60 @@
+{
+ "app": "di",
+ "creation": "2026-05-16 23:47:36.481044",
+ "docstatus": 0,
+ "doctype": "Workspace Sidebar",
+ "header_icon": "organization",
+ "idx": 0,
+ "items": [
+  {
+   "child": 0,
+   "collapsible": 1,
+   "indent": 0,
+   "keep_closed": 0,
+   "label": "Home",
+   "link_to": "Digital Invoicing",
+   "link_type": "Workspace",
+   "show_arrow": 0,
+   "type": "Link"
+  },
+  {
+   "child": 0,
+   "collapsible": 1,
+   "indent": 0,
+   "keep_closed": 0,
+   "label": "Learn Digital Invoicing",
+   "link_type": "URL",
+   "show_arrow": 0,
+   "type": "Link"
+  },
+  {
+   "child": 0,
+   "collapsible": 1,
+   "indent": 0,
+   "keep_closed": 0,
+   "label": "Sales Invoice",
+   "link_to": "Sales Invoice",
+   "link_type": "DocType",
+   "show_arrow": 0,
+   "type": "Link"
+  },
+  {
+   "child": 0,
+   "collapsible": 1,
+   "indent": 0,
+   "keep_closed": 0,
+   "label": "Purchase Invoice",
+   "link_to": "Purchase Invoice",
+   "link_type": "DocType",
+   "show_arrow": 0,
+   "type": "Link"
+  }
+ ],
+ "modified": "2026-05-16 23:48:49.933506",
+ "modified_by": "Administrator",
+ "module": "Accounts",
+ "name": "Digital Invoicing",
+ "owner": "Administrator",
+ "standard": 1,
+ "title": "Digital Invoicing"
+}

@@ -15,4 +15,5 @@ class SROItem(Document):
 		sro_item_id: DF.Int
 		sro_schedule: DF.Link | None
 	# end: auto-generated types
+
 	pass

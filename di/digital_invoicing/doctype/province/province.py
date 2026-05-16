@@ -14,4 +14,5 @@ class Province(Document):
 		province_code: DF.Int
 		province_name: DF.Data
 	# end: auto-generated types
+
 	pass

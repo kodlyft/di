@@ -14,4 +14,5 @@ class HSUom(Document):
 		uom_id: DF.Int
 		uom_name: DF.Data
 	# end: auto-generated types
+
 	pass

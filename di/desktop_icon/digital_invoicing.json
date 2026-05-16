@@ -1,0 +1,22 @@
+{
+ "app": "di",
+ "bg_color": "gray",
+ "creation": "2026-05-16 23:47:36.512950",
+ "docstatus": 0,
+ "doctype": "Desktop Icon",
+ "hidden": 0,
+ "icon_type": "App",
+ "idx": 0,
+ "label": "Digital Invoicing",
+ "link": "/desk/di-dashboard",
+ "link_to": "Digital Invoicing",
+ "link_type": "Workspace Sidebar",
+ "logo_url": "/assets/di/images/di-logo.png",
+ "modified": "2026-05-16 23:48:37.583861",
+ "modified_by": "Administrator",
+ "name": "Digital Invoicing",
+ "owner": "Administrator",
+ "restrict_removal": 0,
+ "roles": [],
+ "standard": 1
+}

@@ -14,4 +14,5 @@ class TransactionType(Document):
 		transaction_desc: DF.Data
 		transaction_type_id: DF.Int
 	# end: auto-generated types
+
 	pass

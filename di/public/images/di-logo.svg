@@ -1,0 +1,15 @@
+<svg width="61" height="61" viewBox="0 0 61 61" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <path d="M42.9279 0H17.1712C7.6878 0 0 7.6878 0 17.1712V42.9279C0 52.4113 7.6878 60.0991 17.1712 60.0991H42.9279C52.4113 60.0991 60.0991 52.4113 60.0991 42.9279V17.1712C60.0991 7.6878 52.4113 0 42.9279 0Z" fill="#2B57E5"/>
+
+  <!-- invoice sheet -->
+  <rect x="13.8" y="11.2" width="20" height="31" rx="3.4" fill="#FFFFFF"/>
+  <!-- invoice content lines (cut-through look) -->
+  <rect x="17.0" y="16.4" width="10.0" height="2.6" rx="1.3" fill="#2B57E5"/>
+  <rect x="17.0" y="21.8" width="12.4" height="2.2" rx="1.1" fill="#2B57E5"/>
+  <rect x="17.0" y="26.2" width="9.0"  height="2.2" rx="1.1" fill="#2B57E5"/>
+  <!-- validation badge: ring separates the disc from the sheet -->
+  <circle cx="36.3" cy="39.3" r="9.7" fill="#2B57E5"/>
+  <circle cx="36.3" cy="39.3" r="8.0" fill="#FFFFFF"/>
+  <path d="M32.4 39.6 L35.2 42.4 L40.4 36.0" fill="none" stroke="#2B57E5"
+        stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>

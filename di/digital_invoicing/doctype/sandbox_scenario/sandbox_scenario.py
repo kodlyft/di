@@ -15,4 +15,5 @@ class SandboxScenario(Document):
 		sale_type: DF.Link | None
 		scenario_id: DF.Data
 	# end: auto-generated types
+
 	pass

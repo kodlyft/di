@@ -31,6 +31,7 @@ class DISettings(Document):
 		strn_no: DF.Data | None
 		sync_mode: DF.Literal["Production", "Sandbox"]
 	# end: auto-generated types
+
 	def validate(self):
 		self._validate_duplicate_sale_types()
 

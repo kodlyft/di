@@ -16,4 +16,5 @@ class DIErrorCode(Document):
 		error_code: DF.Data
 		message: DF.Data | None
 	# end: auto-generated types
+
 	pass
