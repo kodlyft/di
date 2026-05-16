@@ -22,8 +22,8 @@ def sync_provinces(company=None):
 
 	count = 0
 	for item in data:
-		province_code = item.get("provinceId") or item.get("id")
-		province_name = item.get("provinceName") or item.get("name")
+		province_code = item.get("stateProvinceCode")
+		province_name = item.get("stateProvinceDesc")
 		if not province_name:
 			continue
 
@@ -41,35 +41,31 @@ def sync_provinces(company=None):
 			).insert(ignore_permissions=True)
 		count += 1
 
-	frappe.db.commit()
 	return {"message": _("{0} provinces synced").format(count)}
 
 
 @frappe.whitelist()
 def sync_hs_codes(company=None):
-	"""Sync HS codes from FBR API."""
+	"""Sync HS codes from FBR API.
+
+	UOM master data is synchronized through the dedicated UOM endpoint, so the
+	HS code sync only updates the code and description.
+	"""
 	token = _get_token(company)
 	url = f"{REF_BASE_V1}/itemdesccode"
 	data = _make_get_request(url, token, "HS codes")
 
 	count = 0
 	for item in data:
-		hs_code = cstr(item.get("hsCode") or item.get("code") or "").strip()
+		hs_code = cstr(item.get("hS_CODE") or "").strip()
 		if not hs_code:
 			continue
 
-		description = item.get("description") or item.get("itemDescription") or ""
-		uom_name = item.get("uom") or item.get("uomName") or ""
-
-		uom_link = ""
-		if uom_name and frappe.db.exists("HS Uom", uom_name):
-			uom_link = uom_name
+		description = item.get("description") or ""
 
 		if frappe.db.exists("HS Code", hs_code):
 			doc = frappe.get_doc("HS Code", hs_code)
 			doc.description = description
-			if uom_link:
-				doc.uom = uom_link
 			doc.save(ignore_permissions=True)
 		else:
 			frappe.get_doc(
@@ -77,12 +73,10 @@ def sync_hs_codes(company=None):
 					"doctype": "HS Code",
 					"hs_code": hs_code,
 					"description": description,
-					"uom": uom_link,
 				}
 			).insert(ignore_permissions=True)
 		count += 1
 
-	frappe.db.commit()
 	return {"message": _("{0} HS codes synced").format(count)}
 
 
@@ -95,8 +89,8 @@ def sync_uoms(company=None):
 
 	count = 0
 	for item in data:
-		uom_id = item.get("uomId") or item.get("id")
-		uom_name = item.get("uomName") or item.get("name")
+		uom_id = item.get("uoM_ID")
+		uom_name = item.get("description")
 		if not uom_name:
 			continue
 
@@ -114,7 +108,6 @@ def sync_uoms(company=None):
 			).insert(ignore_permissions=True)
 		count += 1
 
-	frappe.db.commit()
 	return {"message": _("{0} UOMs synced").format(count)}
 
 
@@ -127,8 +120,8 @@ def sync_transaction_types(company=None):
 
 	count = 0
 	for item in data:
-		type_id = item.get("transTypeId") or item.get("id")
-		desc = item.get("transTypeDesc") or item.get("description")
+		type_id = item.get("transactioN_TYPE_ID")
+		desc = item.get("transactioN_DESC")
 		if not desc:
 			continue
 
@@ -146,7 +139,6 @@ def sync_transaction_types(company=None):
 			).insert(ignore_permissions=True)
 		count += 1
 
-	frappe.db.commit()
 	return {"message": _("{0} transaction types synced").format(count)}
 
 
@@ -159,20 +151,13 @@ def sync_sro_item_codes(company=None):
 
 	count = 0
 	for item in data:
-		sro_item_id = item.get("sroItemId") or item.get("id")
-		sro_item_desc = item.get("sroItemDesc") or item.get("description") or ""
-		sro_schedule_name = item.get("sroSchedule") or item.get("scheduleName") or ""
-
-		sro_schedule_link = ""
-		if sro_schedule_name and frappe.db.exists("SRO Schedule", sro_schedule_name):
-			sro_schedule_link = sro_schedule_name
+		sro_item_id = item.get("srO_ITEM_ID")
+		sro_item_desc = item.get("srO_ITEM_DESC") or ""
 
 		existing = frappe.db.exists("SRO Item", {"sro_item_id": sro_item_id})
 		if existing:
 			doc = frappe.get_doc("SRO Item", existing)
 			doc.sro_item_desc = sro_item_desc
-			if sro_schedule_link:
-				doc.sro_schedule = sro_schedule_link
 			doc.save(ignore_permissions=True)
 		else:
 			frappe.get_doc(
@@ -180,12 +165,10 @@ def sync_sro_item_codes(company=None):
 					"doctype": "SRO Item",
 					"sro_item_id": sro_item_id,
 					"sro_item_desc": sro_item_desc,
-					"sro_schedule": sro_schedule_link,
 				}
 			).insert(ignore_permissions=True)
 		count += 1
 
-	frappe.db.commit()
 	return {"message": _("{0} SRO item codes synced").format(count)}
 
 
@@ -226,7 +209,6 @@ def sync_sro_schedules(rate_id=None, date=None, origination_supplier=None, compa
 			).insert(ignore_permissions=True)
 		count += 1
 
-	frappe.db.commit()
 	return {"message": _("{0} SRO schedules synced").format(count)}
 
 

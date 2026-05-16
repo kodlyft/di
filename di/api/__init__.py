@@ -1,3 +1,5 @@
+from inspect import signature
+
 import frappe
 from frappe import _
 
@@ -58,7 +60,9 @@ def sync_reference_data(data_type, **kwargs):
 	if not func:
 		frappe.throw(_("Unknown data type: {0}").format(data_type))
 
-	return func(**kwargs)
+	supported_params = signature(func).parameters
+	filtered_kwargs = {key: value for key, value in kwargs.items() if key in supported_params}
+	return func(**filtered_kwargs)
 
 
 @frappe.whitelist()

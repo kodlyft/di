@@ -1,0 +1,162 @@
+{
+ "charts": [],
+ "content": "[{\"id\":\"lgU1oVxY8v\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\">Digital Invoicing</span>\",\"col\":12}},{\"id\":\"48vlkKKtP7\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Learn Digital Invoicing\",\"col\":3}},{\"id\":\"gJL230G_Ta\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Sales Invoice\",\"col\":3}},{\"id\":\"fUbkJH4kaq\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Purchase Invoice\",\"col\":3}},{\"id\":\"AE6cEAAykZ\",\"type\":\"spacer\",\"data\":{\"col\":12}},{\"id\":\"dfVWTZHGdq\",\"type\":\"card\",\"data\":{\"card_name\":\"Masters\",\"col\":4}},{\"id\":\"0aknP8ZtC9\",\"type\":\"card\",\"data\":{\"card_name\":\"Settings\",\"col\":4}},{\"id\":\"aVqf3ousxp\",\"type\":\"card\",\"data\":{\"card_name\":\"Error Tracking\",\"col\":4}}]",
+ "creation": "2026-05-16 17:23:40.495162",
+ "custom_blocks": [],
+ "docstatus": 0,
+ "doctype": "Workspace",
+ "for_user": "",
+ "hide_custom": 0,
+ "icon": "organization",
+ "idx": 0,
+ "indicator_color": "green",
+ "is_hidden": 0,
+ "label": "Digital Invoicing",
+ "links": [
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Masters",
+   "link_count": 5,
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Card Break"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "HS Code",
+   "link_count": 0,
+   "link_to": "HS Code",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "HS Uom",
+   "link_count": 0,
+   "link_to": "HS Uom",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Province",
+   "link_count": 0,
+   "link_to": "Province",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "SRO Item",
+   "link_count": 0,
+   "link_to": "SRO Item",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "SRO Schedule",
+   "link_count": 0,
+   "link_to": "SRO Schedule",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Settings",
+   "link_count": 1,
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Card Break"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "DI Settings",
+   "link_count": 0,
+   "link_to": "DI Settings",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Error Tracking",
+   "link_count": 2,
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Card Break"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "DI Error Code",
+   "link_count": 0,
+   "link_to": "DI Error Code",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "DI Log",
+   "link_count": 0,
+   "link_to": "DI Log",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  }
+ ],
+ "modified": "2026-05-16 17:31:22.102603",
+ "modified_by": "Administrator",
+ "module": "Digital Invoicing",
+ "name": "Digital Invoicing",
+ "number_cards": [],
+ "owner": "Administrator",
+ "parent_page": "",
+ "public": 1,
+ "quick_lists": [],
+ "roles": [],
+ "sequence_id": 26.0,
+ "shortcuts": [
+  {
+   "color": "Grey",
+   "doc_view": "List",
+   "label": "Learn Digital Invoicing",
+   "type": "URL",
+   "url": "https://docs.kodlyft.com/digital-invoicing/introduction"
+  },
+  {
+   "color": "Red",
+   "doc_view": "List",
+   "format": "{} Not Posted",
+   "label": "Sales Invoice",
+   "link_to": "Sales Invoice",
+   "stats_filter": "[[\"Sales Invoice\",\"is_di_posted\",\"=\",0,false]]",
+   "type": "DocType"
+  },
+  {
+   "color": "Grey",
+   "doc_view": "List",
+   "label": "Purchase Invoice",
+   "link_to": "Purchase Invoice",
+   "stats_filter": "[]",
+   "type": "DocType"
+  }
+ ],
+ "title": "Digital Invoicing"
+}
