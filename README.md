@@ -21,16 +21,16 @@ submit, validate, and track tax-compliant invoices inside their ERP workflow. Yo
 
 | Dependency       | Version   |
 | ---------------- | --------- |
-| Python           | >= 3.10   |
-| Frappe Framework | >= 15.0.0 |
-| ERPNext          | >= 15.0.0 |
+| Python           | >= 3.14   |
+| Frappe Framework | >= 16 |
+| ERPNext          | >= 16 |
 | qrcode           | >= 8.2    |
 
 ## Installation
 
 ```bash
 cd $PATH_TO_YOUR_BENCH
-bench get-app https://github.com/kodlyft/di --branch develop
+bench get-app https://github.com/kodlyft/di --branch version-16
 bench setup requirements
 bench --site your-site.com install-app di
 bench --site your-site.com migrate
@@ -110,15 +110,6 @@ Use the **Sync Reference Data** actions in DI Settings to fetch:
 - UOMs
 - Transaction Types
 - SRO Item Codes
-
-## Bundled Fixtures
-
-| Data              | Count |
-| ----------------- | ----- |
-| Provinces         | 7     |
-| HS UOMs           | 31    |
-| Sale Types        | 26    |
-| Sandbox Scenarios | 28    |
 
 ## Development
 
