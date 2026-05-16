@@ -4,7 +4,7 @@
 		["@semantic-release/commit-analyzer", {
 			"preset": "angular",
 			"releaseRules": [
-				{"breaking": true, "release": false}
+				{"breaking": true, "release": "major"}
 			]
 		}],
 		"@semantic-release/release-notes-generator",
