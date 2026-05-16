@@ -1,4 +1,5 @@
 """Sales Invoice event handlers for Digital Invoicing."""
+
 import frappe
 from frappe import _
 from frappe.utils import cint
@@ -22,6 +23,7 @@ def before_submit(doc, method=None):
 		if cint(getattr(profile, "enable_fbr_integration", 0)):
 			_validate_pos_items(doc)
 			from di.integrations.pos_fiscal import fiscalize_invoice
+
 			fiscalize_invoice(doc)
 			_generate_qr(doc)
 			return
@@ -34,6 +36,7 @@ def before_submit(doc, method=None):
 
 	if settings.auto_post_on_submit:
 		from di.integrations.di_api import post_invoice
+
 		post_invoice(doc)
 		_generate_qr(doc)
 
@@ -52,9 +55,9 @@ def _validate_di_items(doc):
 		if sale_type in SRO_REQUIRED_SALE_TYPES:
 			if not item.get("di_sro_serial_no") and not item.get("di_schedule_no"):
 				frappe.throw(
-					_("Row {0}: SRO Serial No or Schedule No is required for sale type '{1}' (Item: {2})").format(
-						item.idx, sale_type, item.item_name
-					)
+					_(
+						"Row {0}: SRO Serial No or Schedule No is required for sale type '{1}' (Item: {2})"
+					).format(item.idx, sale_type, item.item_name)
 				)
 
 
@@ -67,9 +70,9 @@ def _validate_pos_items(doc):
 		pct_code = frappe.db.get_value("Item", item_code, "customs_tariff_number")
 		if not pct_code:
 			frappe.throw(
-				_("Row {0}: Item {1} is missing Customs Tariff Number (PCT Code) required for FBR POS.").format(
-					item.idx, item.item_name
-				)
+				_(
+					"Row {0}: Item {1} is missing Customs Tariff Number (PCT Code) required for FBR POS."
+				).format(item.idx, item.item_name)
 			)
 
 
@@ -77,4 +80,5 @@ def _generate_qr(doc):
 	"""Generate QR code if invoice was posted successfully."""
 	if doc.di_integration_id and not doc.di_qr_code:
 		from di.integrations.qr_code import generate_qr_code
+
 		doc.di_qr_code = generate_qr_code(doc.di_integration_id)

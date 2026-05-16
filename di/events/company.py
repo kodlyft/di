@@ -1,4 +1,5 @@
 """Company event handlers for Digital Invoicing."""
+
 import frappe
 from frappe import _
 

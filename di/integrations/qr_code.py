@@ -3,6 +3,7 @@
 Generates QR Code Version 2 (25x25 modules) as required by FBR.
 Returns base64 data URIs for embedding in print formats.
 """
+
 import base64
 import io
 
@@ -52,7 +53,9 @@ def get_fbr_logo_data_uri():
 
 	logo_path = os.path.join(
 		os.path.dirname(os.path.dirname(__file__)),
-		"public", "images", "fbr_di_logo.png",
+		"public",
+		"images",
+		"fbr_di_logo.png",
 	)
 
 	if not os.path.exists(logo_path):

@@ -19,12 +19,12 @@ submit, validate, and track tax-compliant invoices inside their ERP workflow.
 
 ## Requirements
 
-| Dependency | Version |
-| --- | --- |
-| Python | >= 3.10 |
+| Dependency       | Version   |
+| ---------------- | --------- |
+| Python           | >= 3.10   |
 | Frappe Framework | >= 15.0.0 |
-| ERPNext | >= 15.0.0 |
-| qrcode | >= 7.4 |
+| ERPNext          | >= 15.0.0 |
+| qrcode           | >= 7.4    |
 
 ## Installation
 
@@ -113,12 +113,12 @@ Use the **Sync Reference Data** actions in DI Settings to fetch:
 
 ## Bundled Fixtures
 
-| Data | Count |
-| --- | --- |
-| Provinces | 7 |
-| HS UOMs | 31 |
-| Sale Types | 26 |
-| Sandbox Scenarios | 28 |
+| Data              | Count |
+| ----------------- | ----- |
+| Provinces         | 7     |
+| HS UOMs           | 31    |
+| Sale Types        | 26    |
+| Sandbox Scenarios | 28    |
 
 ## Development
 

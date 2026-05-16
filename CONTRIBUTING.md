@@ -77,14 +77,14 @@ bench build
 
 ## Tooling
 
-| Tool | Purpose |
-| --- | --- |
-| `ruff` | Python linting and formatting |
-| `eslint` | JavaScript linting |
-| `prettier` | Markdown, YAML, and frontend formatting |
+| Tool         | Purpose                                            |
+| ------------ | -------------------------------------------------- |
+| `ruff`       | Python linting and formatting                      |
+| `eslint`     | JavaScript linting                                 |
+| `prettier`   | Markdown, YAML, and frontend formatting            |
 | `pre-commit` | Local automation wrapper for all configured checks |
-| `pip-audit` | Dependency vulnerability scanning in CI |
-| `CodeQL` | GitHub code scanning for Python and JavaScript |
+| `pip-audit`  | Dependency vulnerability scanning in CI            |
+| `CodeQL`     | GitHub code scanning for Python and JavaScript     |
 
 ## Coding Guidelines
 

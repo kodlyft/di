@@ -5,11 +5,11 @@ and credentials used to communicate with FBR services.
 
 ## Supported Versions
 
-| Version / Branch | Supported |
-| --- | --- |
-| `develop` | Yes |
-| Latest tagged release | Yes |
-| Older releases | No |
+| Version / Branch      | Supported |
+| --------------------- | --------- |
+| `develop`             | Yes       |
+| Latest tagged release | Yes       |
+| Older releases        | No        |
 
 ## Reporting a Vulnerability
 

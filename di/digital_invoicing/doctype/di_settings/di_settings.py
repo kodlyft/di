@@ -11,9 +11,7 @@ class DISettings(Document):
 		seen = set()
 		for row in self.get("sale_types") or []:
 			if row.sale_type in seen:
-				frappe.throw(
-					_("Duplicate sale type '{0}' in row {1}").format(row.sale_type, row.idx)
-				)
+				frappe.throw(_("Duplicate sale type '{0}' in row {1}").format(row.sale_type, row.idx))
 			seen.add(row.sale_type)
 
 

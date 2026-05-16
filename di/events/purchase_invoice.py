@@ -1,4 +1,5 @@
 """Purchase Invoice event handlers for Digital Invoicing."""
+
 import frappe
 from frappe import _
 
@@ -18,6 +19,7 @@ def before_submit(doc, method=None):
 
 	if settings.auto_post_on_submit:
 		from di.integrations.di_api import post_invoice
+
 		post_invoice(doc)
 
 

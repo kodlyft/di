@@ -17,10 +17,10 @@ frappe.ui.form.on("Item", {
 			if (company) {
 				return {
 					query: "di.api.get_sale_types_for_company",
-					filters: { company: company },
+					filters: { company: company }
 				};
 			}
 			return {};
 		});
-	},
+	}
 });

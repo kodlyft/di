@@ -3,6 +3,7 @@
 Syncs reference data (provinces, HS codes, UOMs, transaction types,
 SRO schedules, sale type rates) from FBR's PDI API endpoints.
 """
+
 import frappe
 import requests
 from frappe import _
@@ -31,11 +32,13 @@ def sync_provinces(company=None):
 			doc.province_code = province_code
 			doc.save(ignore_permissions=True)
 		else:
-			frappe.get_doc({
-				"doctype": "Province",
-				"province_name": province_name,
-				"province_code": province_code,
-			}).insert(ignore_permissions=True)
+			frappe.get_doc(
+				{
+					"doctype": "Province",
+					"province_name": province_name,
+					"province_code": province_code,
+				}
+			).insert(ignore_permissions=True)
 		count += 1
 
 	frappe.db.commit()
@@ -69,12 +72,14 @@ def sync_hs_codes(company=None):
 				doc.uom = uom_link
 			doc.save(ignore_permissions=True)
 		else:
-			frappe.get_doc({
-				"doctype": "HS Code",
-				"hs_code": hs_code,
-				"description": description,
-				"uom": uom_link,
-			}).insert(ignore_permissions=True)
+			frappe.get_doc(
+				{
+					"doctype": "HS Code",
+					"hs_code": hs_code,
+					"description": description,
+					"uom": uom_link,
+				}
+			).insert(ignore_permissions=True)
 		count += 1
 
 	frappe.db.commit()
@@ -100,11 +105,13 @@ def sync_uoms(company=None):
 			doc.uom_id = uom_id
 			doc.save(ignore_permissions=True)
 		else:
-			frappe.get_doc({
-				"doctype": "HS Uom",
-				"uom_name": uom_name,
-				"uom_id": uom_id,
-			}).insert(ignore_permissions=True)
+			frappe.get_doc(
+				{
+					"doctype": "HS Uom",
+					"uom_name": uom_name,
+					"uom_id": uom_id,
+				}
+			).insert(ignore_permissions=True)
 		count += 1
 
 	frappe.db.commit()
@@ -130,11 +137,13 @@ def sync_transaction_types(company=None):
 			doc.transaction_type_id = type_id
 			doc.save(ignore_permissions=True)
 		else:
-			frappe.get_doc({
-				"doctype": "Transaction Type",
-				"transaction_desc": desc,
-				"transaction_type_id": type_id,
-			}).insert(ignore_permissions=True)
+			frappe.get_doc(
+				{
+					"doctype": "Transaction Type",
+					"transaction_desc": desc,
+					"transaction_type_id": type_id,
+				}
+			).insert(ignore_permissions=True)
 		count += 1
 
 	frappe.db.commit()
@@ -166,12 +175,14 @@ def sync_sro_item_codes(company=None):
 				doc.sro_schedule = sro_schedule_link
 			doc.save(ignore_permissions=True)
 		else:
-			frappe.get_doc({
-				"doctype": "SRO Item",
-				"sro_item_id": sro_item_id,
-				"sro_item_desc": sro_item_desc,
-				"sro_schedule": sro_schedule_link,
-			}).insert(ignore_permissions=True)
+			frappe.get_doc(
+				{
+					"doctype": "SRO Item",
+					"sro_item_id": sro_item_id,
+					"sro_item_desc": sro_item_desc,
+					"sro_schedule": sro_schedule_link,
+				}
+			).insert(ignore_permissions=True)
 		count += 1
 
 	frappe.db.commit()
@@ -206,11 +217,13 @@ def sync_sro_schedules(rate_id=None, date=None, origination_supplier=None, compa
 			doc.sro_id = sro_id
 			doc.save(ignore_permissions=True)
 		else:
-			frappe.get_doc({
-				"doctype": "SRO Schedule",
-				"sro_desc": sro_desc,
-				"sro_id": sro_id,
-			}).insert(ignore_permissions=True)
+			frappe.get_doc(
+				{
+					"doctype": "SRO Schedule",
+					"sro_desc": sro_desc,
+					"sro_id": sro_id,
+				}
+			).insert(ignore_permissions=True)
 		count += 1
 
 	frappe.db.commit()
@@ -265,8 +278,12 @@ def _make_get_request(url, token, data_type, params=None):
 		)
 	except requests.RequestException as e:
 		create_log(
-			"DI Settings", "", {"url": url, "params": params}, str(e),
-			status="Error", api_type="Reference",
+			"DI Settings",
+			"",
+			{"url": url, "params": params},
+			str(e),
+			status="Error",
+			api_type="Reference",
 			title=f"Reference Sync Error: {data_type}",
 		)
 		frappe.throw(_("FBR reference API request failed for {0}: {1}").format(data_type, str(e)))
@@ -274,9 +291,7 @@ def _make_get_request(url, token, data_type, params=None):
 	if response.status_code == 401:
 		frappe.throw(_("FBR API returned 401 Unauthorized. Check your access token."))
 	if response.status_code >= 400:
-		frappe.throw(
-			_("FBR reference API returned {0} for {1}").format(response.status_code, data_type)
-		)
+		frappe.throw(_("FBR reference API returned {0} for {1}").format(response.status_code, data_type))
 
 	try:
 		data = response.json()
@@ -295,8 +310,12 @@ def _make_get_request(url, token, data_type, params=None):
 		data = [data] if data else []
 
 	create_log(
-		"DI Settings", "", {"url": url, "params": params}, {"count": len(data)},
-		status="Success", api_type="Reference",
+		"DI Settings",
+		"",
+		{"url": url, "params": params},
+		{"count": len(data)},
+		status="Success",
+		api_type="Reference",
 		title=f"Reference Sync: {data_type}",
 	)
 

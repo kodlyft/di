@@ -2,6 +2,7 @@
 
 Handles POS invoice fiscalization via FBR's POS Integration Services API.
 """
+
 import json
 import re
 from dataclasses import dataclass
@@ -68,8 +69,12 @@ def fiscalize_invoice(doc):
 		response_data = _post_invoice(doc, payload, settings)
 	except Exception as e:
 		create_log(
-			doc.doctype, doc.name, payload, str(e),
-			status="Error", api_type="POS Fiscal",
+			doc.doctype,
+			doc.name,
+			payload,
+			str(e),
+			status="Error",
+			api_type="POS Fiscal",
 			title=f"POS Fiscal Error: {doc.name}",
 		)
 		frappe.throw(_("FBR POS API request failed: {0}").format(str(e)))
@@ -80,13 +85,15 @@ def fiscalize_invoice(doc):
 		_extract_value(response_data, "Response", "Message", "message", default="")
 	).strip()
 
-	if not invoice_number or (
-		response_code and response_code not in {str(c) for c in POS_SUCCESS_CODES}
-	):
+	if not invoice_number or (response_code and response_code not in {str(c) for c in POS_SUCCESS_CODES}):
 		error_msg = response_message or _("FBR did not return a fiscal invoice number.")
 		create_log(
-			doc.doctype, doc.name, payload, response_data,
-			status="Error", api_type="POS Fiscal",
+			doc.doctype,
+			doc.name,
+			payload,
+			response_data,
+			status="Error",
+			api_type="POS Fiscal",
 			title=f"POS Fiscal Error: {doc.name}",
 			error_message=error_msg,
 		)
@@ -97,8 +104,12 @@ def fiscalize_invoice(doc):
 	doc.di_posting_datetime = now_datetime()
 
 	create_log(
-		doc.doctype, doc.name, payload, response_data,
-		status="Success", api_type="POS Fiscal",
+		doc.doctype,
+		doc.name,
+		payload,
+		response_data,
+		status="Success",
+		api_type="POS Fiscal",
 		title=f"POS Fiscal Success: {doc.name}",
 		fbr_invoice_number=cstr(invoice_number).strip(),
 	)
@@ -110,16 +121,18 @@ def _get_pos_settings(pos_profile):
 	enabled = cint(getattr(profile_doc, "enable_fbr_integration", 0))
 	if not enabled:
 		return POSSettings(
-			enabled=False, environment="Sandbox",
-			pos_id="", bearer_token="", api_url=POS_SANDBOX_URL,
+			enabled=False,
+			environment="Sandbox",
+			pos_id="",
+			bearer_token="",
+			api_url=POS_SANDBOX_URL,
 		)
 
 	environment = cstr(getattr(profile_doc, "fbr_environment", "Sandbox") or "Sandbox").strip()
 	pos_id = cstr(getattr(profile_doc, "fbr_pos_id", "") or "").strip()
 	bearer_token = cstr(profile_doc.get_password("fbr_bearer_token") or "").strip()
-	api_url = (
-		cstr(getattr(profile_doc, "fbr_api_url", "") or "").strip()
-		or (POS_PROD_URL if environment.lower() == "production" else POS_SANDBOX_URL)
+	api_url = cstr(getattr(profile_doc, "fbr_api_url", "") or "").strip() or (
+		POS_PROD_URL if environment.lower() == "production" else POS_SANDBOX_URL
 	)
 
 	missing = []
@@ -136,8 +149,11 @@ def _get_pos_settings(pos_profile):
 		)
 
 	return POSSettings(
-		enabled=True, environment=environment,
-		pos_id=pos_id, bearer_token=bearer_token, api_url=api_url,
+		enabled=True,
+		environment=environment,
+		pos_id=pos_id,
+		bearer_token=bearer_token,
+		api_url=api_url,
 	)
 
 
@@ -168,20 +184,22 @@ def _build_payload(doc, settings):
 			actual_sale_value + line_tax_charged
 		)
 
-		items.append({
-			"ItemCode": item_code,
-			"ItemName": _sanitize(item.get("item_name") or item_code, 150),
-			"Quantity": qty,
-			"PCTCode": pct_code,
-			"TaxRate": line_tax_rate,
-			"SaleValue": actual_sale_value,
-			"TotalAmount": line_total,
-			"TaxCharged": line_tax_charged,
-			"Discount": line_discount,
-			"FurtherTax": 0.0,
-			"InvoiceType": line_invoice_type,
-			"RefUSIN": doc.get("return_against") if is_return else None,
-		})
+		items.append(
+			{
+				"ItemCode": item_code,
+				"ItemName": _sanitize(item.get("item_name") or item_code, 150),
+				"Quantity": qty,
+				"PCTCode": pct_code,
+				"TaxRate": line_tax_rate,
+				"SaleValue": actual_sale_value,
+				"TotalAmount": line_total,
+				"TaxCharged": line_tax_charged,
+				"Discount": line_discount,
+				"FurtherTax": 0.0,
+				"InvoiceType": line_invoice_type,
+				"RefUSIN": doc.get("return_against") if is_return else None,
+			}
+		)
 
 		total_sale_value += actual_sale_value
 		total_tax_charged += line_tax_charged
@@ -198,9 +216,7 @@ def _build_payload(doc, settings):
 		"BuyerNTN": buyer_ntn,
 		"BuyerCNIC": buyer_cnic,
 		"BuyerName": _sanitize(doc.get("customer_name") or "", 150),
-		"BuyerPhoneNumber": _sanitize(
-			doc.get("contact_mobile") or doc.get("contact_phone") or "", 20
-		),
+		"BuyerPhoneNumber": _sanitize(doc.get("contact_mobile") or doc.get("contact_phone") or "", 20),
 		"TotalBillAmount": abs(flt(doc.get("base_rounded_total") or doc.get("base_grand_total"))),
 		"TotalQuantity": total_quantity,
 		"TotalSaleValue": total_sale_value,
@@ -249,10 +265,7 @@ def _post_invoice(doc, payload, settings):
 
 def _resolve_payment_mode(doc):
 	"""Map Mode of Payment to FBR payment mode code (1-6)."""
-	payments = [
-		p for p in (doc.get("payments") or [])
-		if abs(flt(p.get("amount"))) > 0
-	]
+	payments = [p for p in (doc.get("payments") or []) if abs(flt(p.get("amount"))) > 0]
 	if len(payments) > 1:
 		return PAYMENT_MODE_MIXED
 	if not payments:
@@ -284,9 +297,7 @@ def _resolve_payment_mode(doc):
 
 def _resolve_item_invoice_type(is_return, item_code):
 	"""Determine FBR invoice type for an item (1, 3, 11, or 12)."""
-	is_3rd_schedule = cint(
-		frappe.db.get_value("Item", item_code, "fbr_third_schedule") or 0
-	)
+	is_3rd_schedule = cint(frappe.db.get_value("Item", item_code, "fbr_third_schedule") or 0)
 	if is_3rd_schedule:
 		return POS_INVOICE_3RD_SCHEDULE_CREDIT if is_return else POS_INVOICE_3RD_SCHEDULE_NEW
 	return POS_INVOICE_CREDIT if is_return else POS_INVOICE_NEW
@@ -294,13 +305,9 @@ def _resolve_item_invoice_type(is_return, item_code):
 
 def _get_pct_code(item_code):
 	"""Get the PCT/HS code for an item."""
-	pct_code = cstr(
-		frappe.db.get_value("Item", item_code, "customs_tariff_number") or ""
-	).strip()
+	pct_code = cstr(frappe.db.get_value("Item", item_code, "customs_tariff_number") or "").strip()
 	if not pct_code:
-		raise POSFiscalError(
-			_("Item {0} is missing Customs Tariff Number (PCT Code).").format(item_code)
-		)
+		raise POSFiscalError(_("Item {0} is missing Customs Tariff Number (PCT Code).").format(item_code))
 	return pct_code
 
 

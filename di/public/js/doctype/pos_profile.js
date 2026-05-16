@@ -5,7 +5,7 @@ frappe.ui.form.on("POS Profile", {
 
 	enable_fbr_integration(frm) {
 		di_pos_toggle_fields(frm);
-	},
+	}
 });
 
 function di_pos_toggle_fields(frm) {

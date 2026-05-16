@@ -2,6 +2,7 @@
 
 Verifies buyer/seller registration status with FBR.
 """
+
 import frappe
 import requests
 from frappe import _
@@ -43,8 +44,12 @@ def check_status(registration_no, date=None, company=None):
 		)
 	except requests.RequestException as e:
 		create_log(
-			"Customer", "", payload, str(e),
-			status="Error", api_type="STATL",
+			"Customer",
+			"",
+			payload,
+			str(e),
+			status="Error",
+			api_type="STATL",
 			title=f"STATL Error: {registration_no}",
 		)
 		frappe.throw(_("STATL API request failed: {0}").format(str(e)))
@@ -58,7 +63,10 @@ def check_status(registration_no, date=None, company=None):
 		frappe.throw(_("Invalid response from STATL API"))
 
 	create_log(
-		"Customer", "", payload, result,
+		"Customer",
+		"",
+		payload,
+		result,
 		status="Success" if response.status_code == 200 else "Error",
 		api_type="STATL",
 		title=f"STATL Check: {registration_no}",
@@ -97,8 +105,12 @@ def get_registration_type(registration_no, company=None):
 		)
 	except requests.RequestException as e:
 		create_log(
-			"Customer", "", payload, str(e),
-			status="Error", api_type="STATL",
+			"Customer",
+			"",
+			payload,
+			str(e),
+			status="Error",
+			api_type="STATL",
 			title=f"STATL Reg Type Error: {registration_no}",
 		)
 		frappe.throw(_("STATL registration type request failed: {0}").format(str(e)))
@@ -112,7 +124,10 @@ def get_registration_type(registration_no, company=None):
 		frappe.throw(_("Invalid response from STATL API"))
 
 	create_log(
-		"Customer", "", payload, result,
+		"Customer",
+		"",
+		payload,
+		result,
 		status="Success" if response.status_code == 200 else "Error",
 		api_type="STATL",
 		title=f"STATL Reg Type: {registration_no}",

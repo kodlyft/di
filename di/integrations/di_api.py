@@ -2,6 +2,7 @@
 
 Handles both postinvoicedata and validateinvoicedata endpoints.
 """
+
 import json
 from dataclasses import asdict, dataclass
 from decimal import ROUND_HALF_UP, Decimal
@@ -101,8 +102,12 @@ def post_invoice(doc, resync=False):
 		response = _make_request(url, payload, token)
 	except Exception as e:
 		create_log(
-			doc.doctype, doc.name, payload, str(e),
-			status="Error", api_type="DI Post",
+			doc.doctype,
+			doc.name,
+			payload,
+			str(e),
+			status="Error",
+			api_type="DI Post",
 			title=f"DI Post Error: {doc.doctype} {doc.name}",
 		)
 		frappe.throw(_("FBR DI API request failed: {0}").format(str(e)))
@@ -131,14 +136,21 @@ def validate_invoice(doc):
 		response = _make_request(url, payload, token)
 	except Exception as e:
 		create_log(
-			doc.doctype, doc.name, payload, str(e),
-			status="Error", api_type="DI Validate",
+			doc.doctype,
+			doc.name,
+			payload,
+			str(e),
+			status="Error",
+			api_type="DI Validate",
 			title=f"DI Validate Error: {doc.doctype} {doc.name}",
 		)
 		frappe.throw(_("FBR DI validation request failed: {0}").format(str(e)))
 
 	create_log(
-		doc.doctype, doc.name, payload, response,
+		doc.doctype,
+		doc.name,
+		payload,
+		response,
 		status="Success" if _is_valid_response(response) else "Error",
 		api_type="DI Validate",
 		title=f"DI Validate: {doc.doctype} {doc.name}",
@@ -159,9 +171,7 @@ def build_di_payload(doc):
 	invoice_ref_no = ""
 	if doc.get("is_return") and doc.get("return_against"):
 		invoice_type = INVOICE_TYPE_DEBIT_NOTE
-		invoice_ref_no = frappe.db.get_value(
-			doc.doctype, doc.return_against, "di_integration_id"
-		) or ""
+		invoice_ref_no = frappe.db.get_value(doc.doctype, doc.return_against, "di_integration_id") or ""
 
 	invoice = Invoice(
 		invoiceType=invoice_type if not is_purchase else "Purchase Invoice",
@@ -171,50 +181,20 @@ def build_di_payload(doc):
 			else str(doc.posting_date)
 		),
 		sellerBusinessName=(
-			info["supplier"]["business_name"]
-			if is_purchase
-			else info["company"]["business_name"]
+			info["supplier"]["business_name"] if is_purchase else info["company"]["business_name"]
 		),
-		sellerNTNCNIC=(
-			info["supplier"]["ntncnic"]
-			if is_purchase
-			else info["company"]["ntncnic"]
-		),
-		sellerProvince=(
-			info["supplier"]["province"]
-			if is_purchase
-			else info["company"]["province"]
-		),
-		sellerAddress=(
-			info["supplier"]["address"]
-			if is_purchase
-			else info["company"]["address"]
-		),
-		buyerNTNCNIC=(
-			info["customer"]["ntncnic"]
-			if not is_purchase
-			else info["company"]["ntncnic"]
-		),
+		sellerNTNCNIC=(info["supplier"]["ntncnic"] if is_purchase else info["company"]["ntncnic"]),
+		sellerProvince=(info["supplier"]["province"] if is_purchase else info["company"]["province"]),
+		sellerAddress=(info["supplier"]["address"] if is_purchase else info["company"]["address"]),
+		buyerNTNCNIC=(info["customer"]["ntncnic"] if not is_purchase else info["company"]["ntncnic"]),
 		buyerBusinessName=(
-			info["customer"]["business_name"]
-			if not is_purchase
-			else info["company"]["business_name"]
+			info["customer"]["business_name"] if not is_purchase else info["company"]["business_name"]
 		),
 		buyerRegistrationType=(
-			info["customer"].get("registration_type", "")
-			if not is_purchase
-			else "Registered"
+			info["customer"].get("registration_type", "") if not is_purchase else "Registered"
 		),
-		buyerProvince=(
-			info["customer"]["province"]
-			if not is_purchase
-			else info["company"]["province"]
-		),
-		buyerAddress=(
-			info["customer"]["address"]
-			if not is_purchase
-			else info["company"]["address"]
-		),
+		buyerProvince=(info["customer"]["province"] if not is_purchase else info["company"]["province"]),
+		buyerAddress=(info["customer"]["address"] if not is_purchase else info["company"]["address"]),
 		invoiceRefNo=invoice_ref_no,
 		items=_build_invoice_items(doc),
 	)
@@ -224,6 +204,7 @@ def build_di_payload(doc):
 
 def _get_settings(company):
 	from di.digital_invoicing.doctype.di_settings.di_settings import get_settings, is_enabled
+
 	if not is_enabled(company):
 		return None
 	return get_settings(company)
@@ -241,6 +222,7 @@ def _get_validate_url(settings):
 
 def _make_request(url, payload, token):
 	import requests
+
 	response = requests.post(
 		url,
 		json=payload,
@@ -281,8 +263,12 @@ def _handle_success(doc, payload, response, invoice_number, resync):
 		doc.di_qr_code = generate_qr_code(invoice_number)
 
 	create_log(
-		doc.doctype, doc.name, payload, response,
-		status="Success", api_type="DI Post",
+		doc.doctype,
+		doc.name,
+		payload,
+		response,
+		status="Success",
+		api_type="DI Post",
 		title=f"DI Post Success: {doc.doctype} {doc.name}",
 		fbr_invoice_number=invoice_number,
 	)
@@ -297,22 +283,22 @@ def _handle_error(doc, payload, response):
 
 	for item_status in vr.get("invoiceStatuses") or []:
 		if item_status.get("status") != "Valid" and item_status.get("error"):
-			error_parts.append(
-				f"Item {item_status.get('itemSNo', '?')}: {item_status['error']}"
-			)
+			error_parts.append(f"Item {item_status.get('itemSNo', '?')}: {item_status['error']}")
 
 	error_msg = "\n".join(error_parts) if error_parts else str(response)
 
 	create_log(
-		doc.doctype, doc.name, payload, response,
-		status="Error", api_type="DI Post",
+		doc.doctype,
+		doc.name,
+		payload,
+		response,
+		status="Error",
+		api_type="DI Post",
 		title=f"DI Post Error: {doc.doctype} {doc.name}",
 		error_code=vr.get("errorCode", ""),
 		error_message=error_msg,
 	)
-	frappe.throw(
-		_("Digital Invoicing Error:\n{0}").format(error_msg)
-	)
+	frappe.throw(_("Digital Invoicing Error:\n{0}").format(error_msg))
 
 
 def _get_configurations(customer, supplier, company):
@@ -332,14 +318,18 @@ def _get_configurations(customer, supplier, company):
 			"registration_type": _safe_str(customer_doc.get("registration_type")) if customer_doc else "",
 			"province": _safe_str(customer_doc.get("province")) if customer_doc else "",
 			"address": _safe_str(customer_doc.get("di_address")) if customer_doc else "",
-		} if customer_doc else {"ntncnic": "", "business_name": "", "registration_type": "", "province": "", "address": ""},
+		}
+		if customer_doc
+		else {"ntncnic": "", "business_name": "", "registration_type": "", "province": "", "address": ""},
 		"supplier": {
 			"ntncnic": _safe_str(supplier_doc.get("tax_id")) if supplier_doc else "",
 			"business_name": _safe_str(supplier_doc.get("supplier_name")) if supplier_doc else "",
 			"registration_type": _safe_str(supplier_doc.get("registration_type")) if supplier_doc else "",
 			"province": _safe_str(supplier_doc.get("province")) if supplier_doc else "",
 			"address": _safe_str(supplier_doc.get("di_address")) if supplier_doc else "",
-		} if supplier_doc else {"ntncnic": "", "business_name": "", "registration_type": "", "province": "", "address": ""},
+		}
+		if supplier_doc
+		else {"ntncnic": "", "business_name": "", "registration_type": "", "province": "", "address": ""},
 		"company": {
 			"ntncnic": _safe_str(settings.ntn_cnic if settings else company_doc.get("tax_id")),
 			"business_name": _safe_str(company_doc.get("company_name")),
@@ -405,11 +395,7 @@ def _build_invoice_items(doc):
 		extra_tax_amt = _round_currency(extra_tax["amount"])
 
 		qty_decimal = _as_decimal(qty)
-		fixed_price = (
-			_round_currency(_as_decimal(value_excl_st) / qty_decimal)
-			if qty_decimal
-			else 0.0
-		)
+		fixed_price = _round_currency(_as_decimal(value_excl_st) / qty_decimal) if qty_decimal else 0.0
 
 		total_values = _round_currency(
 			_as_decimal(value_excl_st)
