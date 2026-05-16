@@ -22,8 +22,8 @@ submit, validate, and track tax-compliant invoices inside their ERP workflow. Yo
 | Dependency       | Version   |
 | ---------------- | --------- |
 | Python           | >= 3.14   |
-| Frappe Framework | >= 16 |
-| ERPNext          | >= 16 |
+| Frappe Framework | >= 16.0.0 |
+| ERPNext          | >= 16.0.0 |
 | qrcode           | >= 8.2    |
 
 ## Installation
@@ -35,6 +35,8 @@ bench setup requirements
 bench --site your-site.com install-app di
 bench --site your-site.com migrate
 ```
+
+Use `develop` only if you need unreleased in-progress changes.
 
 ## Configuration
 
@@ -134,7 +136,7 @@ review, and CodeQL scanning.
 ## Releases
 
 GitHub releases are built from version tags that match `v*`. Release notes are
-generated automatically from the tagged changes.
+generated automatically from the tagged changes on `version-16`.
 
 ## License
 

@@ -1,7 +1,7 @@
 blank_issues_enabled: false
 contact_links:
   - name: Support
-    url: https://github.com/kodlyft/di/blob/develop/SUPPORT.md
+    url: https://github.com/kodlyft/di/blob/version-16/SUPPORT.md
     about: Use this for setup guidance, usage help, and non-bug support.
   - name: Security Policy
     url: https://github.com/kodlyft/di/security/policy
