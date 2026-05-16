@@ -5,3 +5,12 @@
 tags
 node_modules
 __pycache__
+.coverage
+.coverage.*
+.mypy_cache
+.pytest_cache
+.ruff_cache
+.venv
+build
+coverage.xml
+dist

@@ -1,0 +1,9 @@
+node_modules/
+build/
+dist/
+coverage/
+*.min.js
+di/public/dist/
+di/public/js/lib/
+di/fixtures/*.json
+di/**/doctype/**/*.json

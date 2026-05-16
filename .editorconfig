@@ -19,3 +19,11 @@ max_line_length = 99
 insert_final_newline = false
 indent_style = space
 indent_size = 2
+
+# YAML and Markdown stay space-indented for GitHub tooling
+[{*.yml,*.yaml,*.md}]
+indent_style = space
+indent_size = 2
+
+[*.md]
+trim_trailing_whitespace = false

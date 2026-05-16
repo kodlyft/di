@@ -17,6 +17,7 @@ class DISettings(Document):
 			seen.add(row.sale_type)
 
 
+@frappe.whitelist()
 def is_enabled(company):
 	"""Check if Digital Invoicing is enabled for the given company."""
 	return frappe.db.get_value("DI Settings", {"company": company}, "enabled")

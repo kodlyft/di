@@ -1,0 +1,196 @@
+{% set company = frappe.get_doc("Company", doc.company) %}
+{% set di_settings = frappe.db.get_value("DI Settings", {"company": doc.company}, ["ntn_cnic", "strn_no", "province", "address"], as_dict=1) %}
+{% set customer = frappe.get_doc("Customer", doc.customer) if doc.customer else None %}
+
+<style>
+	.di-print {
+		font-family: Arial, sans-serif;
+		font-size: 11px;
+		line-height: 1.4;
+	}
+	.di-print table {
+		width: 100%;
+		border-collapse: collapse;
+	}
+	.di-print th, .di-print td {
+		border: 1px solid #333;
+		padding: 4px 6px;
+		text-align: left;
+	}
+	.di-print th {
+		background: #f5f5f5;
+		font-weight: bold;
+	}
+	.di-header {
+		text-align: center;
+		margin-bottom: 10px;
+	}
+	.di-header h2 {
+		margin: 0;
+		font-size: 16px;
+	}
+	.di-info-table td {
+		border: none;
+		padding: 2px 6px;
+		vertical-align: top;
+	}
+	.di-info-table .label-col {
+		font-weight: bold;
+		width: 140px;
+		white-space: nowrap;
+	}
+	.di-totals td {
+		text-align: right;
+		font-weight: bold;
+	}
+	.di-fbr-section {
+		margin-top: 15px;
+		padding: 10px;
+		border: 1px solid #333;
+		display: flex;
+		align-items: center;
+		gap: 15px;
+	}
+	.di-qr-code {
+		width: 96px;
+		height: 96px;
+	}
+	.di-fbr-info {
+		flex: 1;
+		font-size: 10px;
+	}
+	.di-right { text-align: right; }
+	.di-center { text-align: center; }
+</style>
+
+<div class="di-print">
+	<div class="di-header">
+		<h2>{{ company.company_name }}</h2>
+		<p>{{ di_settings.address or company.get("address") or "" }}</p>
+		<p><strong>Sales Tax Invoice</strong></p>
+	</div>
+
+	<table style="margin-bottom:10px;">
+		<tr>
+			<td style="width:50%;border:none;vertical-align:top;padding:0 10px 0 0;">
+				<table class="di-info-table">
+					<tr><td colspan="2" style="font-weight:bold;font-size:12px;">Seller Details</td></tr>
+					<tr><td class="label-col">Business Name:</td><td>{{ company.company_name }}</td></tr>
+					<tr><td class="label-col">NTN/CNIC:</td><td>{{ di_settings.ntn_cnic or company.get("tax_id") or "" }}</td></tr>
+					{% if di_settings.strn_no %}<tr><td class="label-col">STRN:</td><td>{{ di_settings.strn_no }}</td></tr>{% endif %}
+					<tr><td class="label-col">Province:</td><td>{{ di_settings.province or "" }}</td></tr>
+					<tr><td class="label-col">Address:</td><td>{{ di_settings.address or "" }}</td></tr>
+				</table>
+			</td>
+			<td style="width:50%;border:none;vertical-align:top;padding:0 0 0 10px;">
+				<table class="di-info-table">
+					<tr><td colspan="2" style="font-weight:bold;font-size:12px;">Buyer Details</td></tr>
+					<tr><td class="label-col">Business Name:</td><td>{{ doc.customer_name or "" }}</td></tr>
+					<tr><td class="label-col">NTN/CNIC:</td><td>{{ customer.ntn_cnic if customer else "" }}</td></tr>
+					<tr><td class="label-col">Registration:</td><td>{{ customer.registration_type if customer else "" }}</td></tr>
+					<tr><td class="label-col">Province:</td><td>{{ customer.province if customer else "" }}</td></tr>
+					<tr><td class="label-col">Address:</td><td>{{ customer.di_address if customer else "" }}</td></tr>
+				</table>
+			</td>
+		</tr>
+	</table>
+
+	<table class="di-info-table" style="margin-bottom:10px;">
+		<tr>
+			<td class="label-col">Invoice No:</td><td>{{ doc.name }}</td>
+			<td class="label-col">Date:</td><td>{{ doc.posting_date }}</td>
+			{% if doc.di_integration_id %}
+			<td class="label-col">FBR Invoice No:</td><td>{{ doc.di_integration_id }}</td>
+			{% endif %}
+		</tr>
+	</table>
+
+	<!-- Items Table -->
+	<table>
+		<thead>
+			<tr>
+				<th style="width:30px;">#</th>
+				<th>HS Code</th>
+				<th>Description</th>
+				<th>Sale Type</th>
+				<th class="di-right">Qty</th>
+				<th>UOM</th>
+				<th class="di-right">Value (Excl. ST)</th>
+				<th class="di-right">ST Rate</th>
+				<th class="di-right">Sales Tax</th>
+				<th class="di-right">Further Tax</th>
+				<th class="di-right">FED</th>
+				<th class="di-right">Total</th>
+			</tr>
+		</thead>
+		<tbody>
+			{% for item in doc.items %}
+			<tr>
+				<td>{{ item.idx }}</td>
+				<td>{{ item.di_hs_code or "" }}</td>
+				<td>{{ item.item_name }}</td>
+				<td>{{ item.di_sale_type or "" }}</td>
+				<td class="di-right">{{ item.qty }}</td>
+				<td>{{ item.di_hs_uom or item.uom or "" }}</td>
+				<td class="di-right">{{ frappe.utils.fmt_money(item.net_amount, currency=doc.currency) }}</td>
+				<td class="di-right">
+					{% set taxes = json.loads(doc.taxes[0].item_wise_tax_detail or "{}") if doc.taxes else {} %}
+					{% set item_tax = taxes.get(item.item_code, [0,0]) %}
+					{% if item_tax is iterable and item_tax is not string %}{{ item_tax[0] if item_tax|length > 0 else 0 }}%{% endif %}
+				</td>
+				<td class="di-right">
+					{% if item_tax is iterable and item_tax is not string and item_tax|length > 1 %}
+						{{ frappe.utils.fmt_money(item_tax[1], currency=doc.currency) }}
+					{% else %}
+						{{ frappe.utils.fmt_money(0, currency=doc.currency) }}
+					{% endif %}
+				</td>
+				<td class="di-right">{{ frappe.utils.fmt_money(0, currency=doc.currency) }}</td>
+				<td class="di-right">{{ frappe.utils.fmt_money(item.di_fed_payable or 0, currency=doc.currency) }}</td>
+				<td class="di-right">{{ frappe.utils.fmt_money(item.amount, currency=doc.currency) }}</td>
+			</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+
+	<!-- Totals -->
+	<table style="width:50%;margin-left:auto;margin-top:10px;">
+		<tr class="di-totals">
+			<td style="border:none;">Net Total:</td>
+			<td style="border:none;">{{ frappe.utils.fmt_money(doc.net_total, currency=doc.currency) }}</td>
+		</tr>
+		{% for tax in doc.taxes %}
+		<tr class="di-totals">
+			<td style="border:none;">{{ tax.description }}:</td>
+			<td style="border:none;">{{ frappe.utils.fmt_money(tax.tax_amount, currency=doc.currency) }}</td>
+		</tr>
+		{% endfor %}
+		<tr class="di-totals" style="font-size:13px;">
+			<td style="border-top:2px solid #333;border-bottom:none;border-left:none;border-right:none;">Grand Total:</td>
+			<td style="border-top:2px solid #333;border-bottom:none;border-left:none;border-right:none;">{{ frappe.utils.fmt_money(doc.grand_total, currency=doc.currency) }}</td>
+		</tr>
+	</table>
+
+	<!-- FBR Section (only if posted) -->
+	{% if doc.is_di_posted and doc.di_integration_id %}
+	<div class="di-fbr-section">
+		{% if doc.di_qr_code %}
+		<div>
+			<img src="{{ doc.di_qr_code }}" class="di-qr-code" alt="FBR QR Code" />
+		</div>
+		{% endif %}
+		<div class="di-fbr-info">
+			{% set fbr_logo = frappe.get_attr("di.integrations.qr_code.get_fbr_logo_data_uri")() %}
+			{% if fbr_logo %}
+			<img src="{{ fbr_logo }}" style="height:30px;margin-bottom:5px;" alt="FBR Logo" />
+			{% endif %}
+			<p><strong>FBR Invoice Number:</strong> {{ doc.di_integration_id }}</p>
+			<p><strong>Date & Time:</strong> {{ doc.di_posting_datetime }}</p>
+			<p style="font-size:9px;margin-top:5px;">
+				This invoice has been reported to FBR through Digital Invoicing System.
+				Verify this invoice at <strong>https://e.fbr.gov.pk</strong>
+			</p>
+		</div>
+	</div>
+	{% endif %}
+</div>

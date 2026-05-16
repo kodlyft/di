@@ -1,0 +1,49 @@
+name: Feature Request
+description: Propose a new capability or improvement for DI
+labels: ["enhancement"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Use this template for feature requests and product improvements.
+
+        For vulnerabilities, follow `SECURITY.md`.
+
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem statement
+      description: What user or business problem are you trying to solve?
+      placeholder: Describe the problem first.
+    validations:
+      required: true
+
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed solution
+      description: Explain the change you want to see.
+      placeholder: Describe the expected behavior or workflow.
+    validations:
+      required: true
+
+  - type: textarea
+    id: compliance-impact
+    attributes:
+      label: Compliance or workflow impact
+      description: Call out any FBR, invoice, tax, or ERPNext workflow impact.
+      placeholder: Explain whether this affects payloads, validation, permissions, or printed output.
+
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives considered
+      description: Describe any workaround or alternative solution you considered.
+
+  - type: checkboxes
+    id: conduct
+    attributes:
+      label: Code of Conduct
+      options:
+        - label: I agree to follow this project's Code of Conduct
+          required: true

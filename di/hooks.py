@@ -1,14 +1,14 @@
 app_name = "di"
 app_title = "Digital Invoicing"
 app_publisher = "kodlyft"
-app_description = "A digital invoicing & FBR POS Integrator app"
+app_description = "FBR Digital Invoicing & POS Fiscal Integration for ERPNext"
 app_email = "hello@kodlyft.com"
 app_license = "mit"
 
 # Apps
 # ------------------
 
-# required_apps = []
+required_apps = ["erpnext"]
 
 # Each item in the list will be shown as an app in the apps page
 # add_to_apps_screen = [
@@ -43,7 +43,12 @@ app_license = "mit"
 # page_js = {"page" : "public/js/file.js"}
 
 # include js in doctype views
-# doctype_js = {"doctype" : "public/js/doctype.js"}
+doctype_js = {
+	"Sales Invoice": "public/js/doctype/sales_invoice.js",
+	"Purchase Invoice": "public/js/doctype/purchase_invoice.js",
+	"Item": "public/js/doctype/item.js",
+	"POS Profile": "public/js/doctype/pos_profile.js",
+}
 # doctype_list_js = {"doctype" : "public/js/doctype_list.js"}
 # doctype_tree_js = {"doctype" : "public/js/doctype_tree.js"}
 # doctype_calendar_js = {"doctype" : "public/js/doctype_calendar.js"}
@@ -74,22 +79,26 @@ app_license = "mit"
 # ----------
 
 # add methods and filters to jinja environment
-# jinja = {
-# 	"methods": "di.utils.jinja_methods",
-# 	"filters": "di.utils.jinja_filters"
-# }
+jinja = {
+	"methods": [
+		"di.integrations.qr_code.generate_qr_code",
+		"di.integrations.qr_code.get_fbr_logo_data_uri",
+	]
+}
 
 # Installation
 # ------------
 
 # before_install = "di.install.before_install"
-# after_install = "di.install.after_install"
+after_install = "di.install.after_install"
 
 # Uninstallation
 # ------------
 
 # before_uninstall = "di.uninstall.before_uninstall"
 # after_uninstall = "di.uninstall.after_uninstall"
+
+after_migrate = "di.migrate.after_migrate"
 
 # Integration Setup
 # ------------------
@@ -137,13 +146,20 @@ app_license = "mit"
 # ---------------
 # Hook on document methods and events
 
-# doc_events = {
-# 	"*": {
-# 		"on_update": "method",
-# 		"on_cancel": "method",
-# 		"on_trash": "method"
-# 	}
-# }
+doc_events = {
+	"Sales Invoice": {
+		"before_submit": "di.events.sales_invoice.before_submit",
+	},
+	"Purchase Invoice": {
+		"before_submit": "di.events.purchase_invoice.before_submit",
+	},
+	"Item": {
+		"before_save": "di.events.item.before_save",
+	},
+	"Company": {
+		"before_save": "di.events.company.before_save",
+	},
+}
 
 # Scheduled Tasks
 # ---------------
@@ -236,7 +252,7 @@ app_license = "mit"
 # ]
 
 # Automatically update python controller files with type annotations for this app.
-# export_python_type_annotations = True
+export_python_type_annotations = True
 
 # default_log_clearing_doctypes = {
 # 	"Logging DocType Name": 30  # days to retain logs

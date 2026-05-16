@@ -128,6 +128,7 @@ def setup_custom_fields():
 				label="Digital Invoicing",
 				fieldtype="Section Break",
 				insert_after="remarks",
+				depends_on="eval:!doc.is_pos",
 			),
 			dict(
 				fieldname="di_integration_id",
