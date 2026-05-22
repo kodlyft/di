@@ -28,7 +28,7 @@ function di_settings_add_sync_buttons(frm) {
 		{ label: __("Sync HS Codes"), data_type: "hs_codes" },
 		{ label: __("Sync HS Code UOMs"), data_type: "hs_code_uoms" },
 		{ label: __("Sync UOMs"), data_type: "uoms" },
-		{ label: __("Sync Transaction Types"), data_type: "transaction_types" },
+		{ label: __("Sync Sale Types"), data_type: "sale_types" },
 		{ label: __("Sync SRO Item Codes"), data_type: "sro_item_codes" },
 	];
 

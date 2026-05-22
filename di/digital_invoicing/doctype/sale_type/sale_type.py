@@ -13,5 +13,6 @@ class SaleType(Document):
 
 		requires_sro: DF.Check
 		sale_type_name: DF.Data
+		transaction_type_id: DF.Int
 	# end: auto-generated types
 	pass

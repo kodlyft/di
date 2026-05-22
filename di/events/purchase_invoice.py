@@ -15,12 +15,12 @@ def before_submit(doc, method=None):
 	if not settings:
 		return
 
-	_validate_items(doc)
+	# _validate_items(doc)
 
-	if settings.auto_post_on_submit:
-		from di.integrations.di_api import post_invoice
+	# if settings.auto_post_on_submit:
+	# 	from di.integrations.di_api import post_invoice
 
-		post_invoice(doc)
+	# 	post_invoice(doc)
 
 
 def _validate_items(doc):
