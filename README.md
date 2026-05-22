@@ -110,7 +110,7 @@ Use the **Sync Reference Data** actions in DI Settings to fetch:
 - Provinces
 - HS Codes
 - UOMs
-- Transaction Types
+- Sale Types
 - SRO Item Codes
 
 ## Development

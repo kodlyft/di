@@ -1,6 +1,6 @@
 """FBR Reference Data API integration.
 
-Syncs reference data (provinces, HS codes, UOMs, transaction types,
+Syncs reference data (provinces, HS codes, UOMs, sale types,
 SRO schedules, sale type rates) from FBR's PDI API endpoints.
 """
 
@@ -128,11 +128,17 @@ def sync_uoms(company=None):
 
 
 @frappe.whitelist()
-def sync_transaction_types(company=None):
-	"""Sync transaction types from FBR API."""
+def sync_sale_types(company=None):
+	"""Sync sale types from FBR API.
+
+	FBR exposes the master list of sale types via the `/transtypecode` reference
+	endpoint (the same descriptions that go into the invoice payload's
+	`saleType` field). The `transactioN_TYPE_ID` is retained on the Sale Type
+	record so it can be used as `transTypeId` against the v2 SaleTypeToRate API.
+	"""
 	token = _get_token(company)
 	url = f"{REF_BASE_V1}/transtypecode"
-	data = _make_get_request(url, token, "transaction types")
+	data = _make_get_request(url, token, "sale types")
 
 	count = 0
 	for item in data:
@@ -141,21 +147,21 @@ def sync_transaction_types(company=None):
 		if not desc:
 			continue
 
-		if frappe.db.exists("Transaction Type", desc):
-			doc = frappe.get_doc("Transaction Type", desc)
+		if frappe.db.exists("Sale Type", desc):
+			doc = frappe.get_doc("Sale Type", desc)
 			doc.transaction_type_id = type_id
 			doc.save(ignore_permissions=True)
 		else:
 			frappe.get_doc(
 				{
-					"doctype": "Transaction Type",
-					"transaction_desc": desc,
+					"doctype": "Sale Type",
+					"sale_type_name": desc,
 					"transaction_type_id": type_id,
 				}
 			).insert(ignore_permissions=True)
 		count += 1
 
-	return {"message": _("{0} transaction types synced").format(count)}
+	return {"message": _("{0} sale types synced").format(count)}
 
 
 @frappe.whitelist()

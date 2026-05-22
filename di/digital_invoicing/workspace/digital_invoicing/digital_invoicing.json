@@ -16,8 +16,56 @@
   {
    "hidden": 0,
    "is_query_report": 0,
+   "label": "Settings",
+   "link_count": 1,
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Card Break"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "DI Settings",
+   "link_count": 0,
+   "link_to": "DI Settings",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Error Tracking",
+   "link_count": 2,
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Card Break"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "DI Error Code",
+   "link_count": 0,
+   "link_to": "DI Error Code",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "DI Log",
+   "link_count": 0,
+   "link_to": "DI Log",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
    "label": "Masters",
-   "link_count": 5,
+   "link_count": 6,
    "link_type": "DocType",
    "onboard": 0,
    "type": "Card Break"
@@ -75,53 +123,15 @@
   {
    "hidden": 0,
    "is_query_report": 0,
-   "label": "Settings",
-   "link_count": 1,
-   "link_type": "DocType",
-   "onboard": 0,
-   "type": "Card Break"
-  },
-  {
-   "hidden": 0,
-   "is_query_report": 0,
-   "label": "DI Settings",
+   "label": "Sale Type",
    "link_count": 0,
-   "link_to": "DI Settings",
-   "link_type": "DocType",
-   "onboard": 0,
-   "type": "Link"
-  },
-  {
-   "hidden": 0,
-   "is_query_report": 0,
-   "label": "Error Tracking",
-   "link_count": 2,
-   "link_type": "DocType",
-   "onboard": 0,
-   "type": "Card Break"
-  },
-  {
-   "hidden": 0,
-   "is_query_report": 0,
-   "label": "DI Error Code",
-   "link_count": 0,
-   "link_to": "DI Error Code",
-   "link_type": "DocType",
-   "onboard": 0,
-   "type": "Link"
-  },
-  {
-   "hidden": 0,
-   "is_query_report": 0,
-   "label": "DI Log",
-   "link_count": 0,
-   "link_to": "DI Log",
+   "link_to": "Sale Type",
    "link_type": "DocType",
    "onboard": 0,
    "type": "Link"
   }
  ],
- "modified": "2026-05-16 17:31:22.102603",
+ "modified": "2026-05-22 12:37:51.521294",
  "modified_by": "Administrator",
  "module": "Digital Invoicing",
  "name": "Digital Invoicing",
@@ -146,7 +156,7 @@
    "format": "{} Not Posted",
    "label": "Sales Invoice",
    "link_to": "Sales Invoice",
-   "stats_filter": "[[\"Sales Invoice\",\"is_di_posted\",\"=\",0,false]]",
+   "stats_filter": "[[\"Sales Invoice\",\"is_di_posted\",\"=\",0,false],[\"Sales Invoice\",\"is_pos\",\"=\",0,false]]",
    "type": "DocType"
   },
   {
