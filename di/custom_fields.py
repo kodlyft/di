@@ -187,6 +187,7 @@ def setup_custom_fields():
 				insert_after="di_taxes_section",
 				fetch_from="item_code.hs_code",
 				read_only=1,
+    			allow_on_submit=1,
 			),
 			dict(
 				fieldname="di_hs_uom",
@@ -196,6 +197,7 @@ def setup_custom_fields():
 				insert_after="di_hs_code",
 				fetch_from="item_code.hs_uom",
 				read_only=1,
+    			allow_on_submit=1,
 			),
 			dict(
 				fieldname="di_sale_type",
@@ -204,6 +206,7 @@ def setup_custom_fields():
 				options="Sale Type",
 				insert_after="di_hs_uom",
 				fetch_from="item_code.sale_type",
+				allow_on_submit=1,
 			),
 			dict(
 				fieldname="column_break_di_item",
@@ -217,6 +220,7 @@ def setup_custom_fields():
 				insert_after="column_break_di_item",
 				fetch_from="item_code.sro_item_serial_no",
 				read_only=1,
+				allow_on_submit=1,
 			),
 			dict(
 				fieldname="di_schedule_no",
@@ -225,6 +229,7 @@ def setup_custom_fields():
 				insert_after="di_sro_serial_no",
 				fetch_from="item_code.sro_schedule_no",
 				read_only=1,
+				allow_on_submit=1,
 			),
 			dict(
 				fieldname="di_fed_payable",
@@ -232,6 +237,7 @@ def setup_custom_fields():
 				fieldtype="Currency",
 				insert_after="di_schedule_no",
 				default="0",
+				allow_on_submit=1,
 			),
 		],
 		"Purchase Invoice": [
@@ -277,6 +283,7 @@ def setup_custom_fields():
 				insert_after="item_name",
 				fetch_from="item_code.hs_code",
 				read_only=1,
+				allow_on_submit=1,
 			),
 		],
 		"Sales Taxes and Charges": [

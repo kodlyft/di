@@ -53,7 +53,7 @@ def sync_reference_data(data_type, **kwargs):
 		"hs_codes": reference_api.sync_hs_codes,
 		"hs_code_uoms": reference_api.sync_hs_code_uoms,
 		"uoms": reference_api.sync_uoms,
-		"transaction_types": reference_api.sync_transaction_types,
+		"sale_types": reference_api.sync_sale_types,
 		"sro_item_codes": reference_api.sync_sro_item_codes,
 	}
 

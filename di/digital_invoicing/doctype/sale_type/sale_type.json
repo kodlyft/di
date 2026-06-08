@@ -5,6 +5,7 @@
  "doctype": "DocType",
  "engine": "InnoDB",
  "field_order": [
+  "transaction_type_id",
   "sale_type_name",
   "column_break_npxx",
   "requires_sro"
@@ -19,6 +20,12 @@
    "unique": 1
   },
   {
+   "fieldname": "transaction_type_id",
+   "fieldtype": "Int",
+   "in_list_view": 1,
+   "label": "Transaction Type ID"
+  },
+  {
    "default": "0",
    "fieldname": "requires_sro",
    "fieldtype": "Check",
@@ -30,7 +37,7 @@
   }
  ],
  "links": [],
- "modified": "2026-05-16 22:10:04.744031",
+ "modified": "2026-05-20 18:04:13.648571",
  "modified_by": "Administrator",
  "module": "Digital Invoicing",
  "name": "Sale Type",
