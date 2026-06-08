@@ -1,5 +1,6 @@
 {
  "actions": [],
+ "allow_bulk_edit": 1,
  "autoname": "field:error_code",
  "creation": "2025-05-15 10:00:00",
  "doctype": "DocType",
@@ -40,7 +41,7 @@
  ],
  "in_create": 1,
  "links": [],
- "modified": "2026-05-16 22:10:39.426117",
+ "modified": "2026-06-08 21:22:40.935394",
  "modified_by": "Administrator",
  "module": "Digital Invoicing",
  "name": "DI Error Code",
@@ -58,7 +59,11 @@
   },
   {
    "read": 1,
-   "role": "All"
+   "role": "Accounts Manager"
+  },
+  {
+   "read": 1,
+   "role": "Accounts User"
   }
  ],
  "row_format": "Dynamic",

@@ -1,5 +1,6 @@
 {
  "actions": [],
+ "allow_bulk_edit": 1,
  "autoname": "field:hs_code",
  "creation": "2025-05-15 10:00:00",
  "doctype": "DocType",
@@ -31,7 +32,7 @@
   }
  ],
  "links": [],
- "modified": "2026-05-16 22:09:30.983981",
+ "modified": "2026-06-08 21:18:18.753654",
  "modified_by": "Administrator",
  "module": "Digital Invoicing",
  "name": "HS Code",
@@ -50,8 +51,31 @@
    "write": 1
   },
   {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
    "read": 1,
-   "role": "All"
+   "report": 1,
+   "role": "Accounts Manager",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Accounts User",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "read": 1,
+   "role": "Desk User"
   }
  ],
  "row_format": "Dynamic",
