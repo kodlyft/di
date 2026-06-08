@@ -1,4 +1,5 @@
 {
+ "app": "di",
  "charts": [],
  "content": "[{\"id\":\"lgU1oVxY8v\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\">Digital Invoicing</span>\",\"col\":12}},{\"id\":\"48vlkKKtP7\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Learn Digital Invoicing\",\"col\":3}},{\"id\":\"gJL230G_Ta\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Sales Invoice\",\"col\":3}},{\"id\":\"fUbkJH4kaq\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Purchase Invoice\",\"col\":3}},{\"id\":\"AE6cEAAykZ\",\"type\":\"spacer\",\"data\":{\"col\":12}},{\"id\":\"dfVWTZHGdq\",\"type\":\"card\",\"data\":{\"card_name\":\"Masters\",\"col\":4}},{\"id\":\"0aknP8ZtC9\",\"type\":\"card\",\"data\":{\"card_name\":\"Settings\",\"col\":4}},{\"id\":\"aVqf3ousxp\",\"type\":\"card\",\"data\":{\"card_name\":\"Error Tracking\",\"col\":4}}]",
  "creation": "2026-05-16 17:23:40.495162",
@@ -131,7 +132,7 @@
    "type": "Link"
   }
  ],
- "modified": "2026-05-22 12:37:51.521294",
+ "modified": "2026-06-08 21:15:33.312497",
  "modified_by": "Administrator",
  "module": "Digital Invoicing",
  "name": "Digital Invoicing",
@@ -156,7 +157,7 @@
    "format": "{} Not Posted",
    "label": "Sales Invoice",
    "link_to": "Sales Invoice",
-   "stats_filter": "[[\"Sales Invoice\",\"is_di_posted\",\"=\",0,false],[\"Sales Invoice\",\"is_pos\",\"=\",0,false]]",
+   "stats_filter": "[[\"Sales Invoice\",\"is_di_posted\",\"=\",0],[\"Sales Invoice\",\"is_pos\",\"=\",0]]",
    "type": "DocType"
   },
   {
@@ -168,5 +169,6 @@
    "type": "DocType"
   }
  ],
- "title": "Digital Invoicing"
+ "title": "Digital Invoicing",
+ "type": "Workspace"
 }
