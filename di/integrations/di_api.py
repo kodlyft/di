@@ -380,6 +380,7 @@ def _build_invoice_items(doc):
 	"""Transform invoice line items to FBR DI format."""
 	item_taxes = _get_taxes(doc.taxes)
 	invoice_items = []
+	conversion_rate = _as_decimal(doc.get("conversion_rate") or 1)
 
 	for line in doc.items:
 		item_code = line.get("item_code")
@@ -389,7 +390,7 @@ def _build_invoice_items(doc):
 		extra_tax = tax_data.get("Advance Tax", {"percentage": 0.0, "amount": 0.0})
 
 		qty = flt(line.get("qty", 0))
-		value_excl_st = _round_currency(line.get("net_amount", 0))
+		value_excl_st = _round_currency(line.get("base_net_amount") or line.get("net_amount", 0))
 
 		sales_tax = _round_currency(
 			_as_decimal(value_excl_st) * _as_decimal(gst["percentage"]) / Decimal("100")
@@ -398,7 +399,11 @@ def _build_invoice_items(doc):
 		extra_tax_amt = _round_currency(extra_tax["amount"])
 
 		qty_decimal = _as_decimal(qty)
-		fixed_price = _round_currency(_as_decimal(value_excl_st) / qty_decimal) if qty_decimal else 0.0
+		fixed_price = _round_currency(line.get("base_price_list_rate") or 0)
+		if not fixed_price:
+			fixed_price = _round_currency(_as_decimal(value_excl_st) / qty_decimal) if qty_decimal else 0.0
+
+		discount = _as_decimal(line.get("discount_amount", 0)) * qty_decimal * conversion_rate
 
 		total_values = _round_currency(
 			_as_decimal(value_excl_st)
@@ -410,8 +415,8 @@ def _build_invoice_items(doc):
 		sale_type = line.get("di_sale_type") or ""
 
 		invoice_item = InvoiceItem(
-			discount=max(_round_currency(line.get("discount_amount", 0)), 0.0),
-			fedPayable=_round_currency(line.get("di_fed_payable", 0)),
+			discount=max(_round_currency(discount), 0.0),
+			fedPayable=_round_currency(_as_decimal(line.get("di_fed_payable", 0)) * conversion_rate),
 			furtherTax=further_tax_amt,
 			hsCode=_safe_str(line.get("di_hs_code", "")),
 			extraTax=extra_tax_amt,
