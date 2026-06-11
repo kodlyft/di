@@ -20,14 +20,13 @@ classifiers = [
 ]
 dynamic = ["version"]
 dependencies = [
-    # "frappe~=15.0.0" # Installed and managed by bench.
     "qrcode[pil]>=8.2"
 ]
 
 [project.urls]
 Repository = "https://github.com/kodlyft/di"
 Issues = "https://github.com/kodlyft/di/issues"
-Changelog = "https://github.com/kodlyft/di/blob/develop/CHANGELOG.md"
+Changelog = "https://github.com/kodlyft/di/blob/version-15/CHANGELOG.md"
 
 [build-system]
 requires = ["flit_core >=3.12.0,<4"]
@@ -40,6 +39,9 @@ build-backend = "flit_core.buildapi"
 # These apt dependencies will be installed from Ubuntu repositories when you host your app on Frappe Cloud
 [deploy.dependencies.apt]
 packages = []
+
+[tool.bench.frappe-dependencies]
+frappe = ">=15.60.0,<16.0.0"
 
 [tool.ruff]
 line-length = 110
