@@ -414,13 +414,18 @@ def _build_invoice_items(doc):
 
 		sale_type = line.get("di_sale_type") or ""
 
+		product_description = _safe_str(line.get("item_name", ""))
+		row_no = line.get("idx")
+		if row_no:
+			product_description = f"{product_description} (Row {row_no})".strip()
+
 		invoice_item = InvoiceItem(
 			discount=max(_round_currency(discount), 0.0),
 			fedPayable=_round_currency(_as_decimal(line.get("di_fed_payable", 0)) * conversion_rate),
 			furtherTax=further_tax_amt,
 			hsCode=_safe_str(line.get("di_hs_code", "")),
 			extraTax=extra_tax_amt,
-			productDescription=_safe_str(line.get("item_name", "")),
+			productDescription=product_description,
 			quantity=round(qty, 4),
 			rate=_format_rate(gst["percentage"], sale_type),
 			salesTaxApplicable=sales_tax,
