@@ -42,26 +42,3 @@ def generate_qr_code(invoice_number):
 	encoded = base64.b64encode(buffer.getvalue()).decode("utf-8")
 
 	return f"data:image/png;base64,{encoded}"
-
-
-def get_fbr_logo_data_uri():
-	"""Return the FBR DI logo as a base64 data URI.
-
-	Looks for the logo file in the app's public directory.
-	"""
-	import os
-
-	logo_path = os.path.join(
-		os.path.dirname(os.path.dirname(__file__)),
-		"public",
-		"images",
-		"fbr_di_logo.png",
-	)
-
-	if not os.path.exists(logo_path):
-		return ""
-
-	with open(logo_path, "rb") as f:
-		encoded = base64.b64encode(f.read()).decode("utf-8")
-
-	return f"data:image/png;base64,{encoded}"

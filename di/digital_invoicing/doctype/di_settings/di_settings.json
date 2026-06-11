@@ -222,7 +222,7 @@
    "link_fieldname": "document_type"
   }
  ],
- "modified": "2026-05-16 19:19:32.399896",
+ "modified": "2026-06-11 17:00:02.706466",
  "modified_by": "Administrator",
  "module": "Digital Invoicing",
  "name": "DI Settings",
@@ -245,6 +245,14 @@
    "read": 1,
    "role": "Accounts Manager",
    "write": 1
+  },
+  {
+   "read": 1,
+   "role": "Accounts User"
+  },
+  {
+   "read": 1,
+   "role": "Desk User"
   }
  ],
  "row_format": "Dynamic",

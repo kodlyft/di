@@ -81,7 +81,6 @@ doctype_js = {
 jinja = {
 	"methods": [
 		"di.integrations.qr_code.generate_qr_code",
-		"di.integrations.qr_code.get_fbr_logo_data_uri",
 	]
 }
 

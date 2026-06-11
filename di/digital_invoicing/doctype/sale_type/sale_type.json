@@ -37,7 +37,7 @@
   }
  ],
  "links": [],
- "modified": "2026-05-20 18:04:13.648571",
+ "modified": "2026-06-11 16:58:16.058872",
  "modified_by": "Administrator",
  "module": "Digital Invoicing",
  "name": "Sale Type",
@@ -56,8 +56,26 @@
    "write": 1
   },
   {
+   "create": 1,
+   "delete": 1,
    "read": 1,
-   "role": "All"
+   "role": "Accounts Manager",
+   "write": 1
+  },
+  {
+   "create": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Accounts User",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "read": 1,
+   "role": "Desk User"
   }
  ],
  "quick_entry": 1,

@@ -40,7 +40,7 @@
  ],
  "in_create": 1,
  "links": [],
- "modified": "2026-05-16 17:19:38.691819",
+ "modified": "2026-06-11 17:02:04.052714",
  "modified_by": "Administrator",
  "module": "Digital Invoicing",
  "name": "DI Error Code",
@@ -57,8 +57,13 @@
    "write": 1
   },
   {
+   "delete": 1,
    "read": 1,
-   "role": "All"
+   "role": "Accounts Manager"
+  },
+  {
+   "read": 1,
+   "role": "Accounts User"
   }
  ],
  "row_format": "Dynamic",

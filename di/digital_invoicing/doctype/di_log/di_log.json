@@ -110,7 +110,7 @@
  ],
  "in_create": 1,
  "links": [],
- "modified": "2026-05-16 20:21:47.139997",
+ "modified": "2026-06-11 16:58:58.176041",
  "modified_by": "Administrator",
  "module": "Digital Invoicing",
  "name": "DI Log",
@@ -125,6 +125,16 @@
    "report": 1,
    "role": "System Manager",
    "write": 1
+  },
+  {
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Accounts Manager",
+   "share": 1
   },
   {
    "read": 1,

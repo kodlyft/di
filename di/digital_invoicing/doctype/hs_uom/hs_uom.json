@@ -29,7 +29,7 @@
   }
  ],
  "links": [],
- "modified": "2026-05-16 17:12:08.763844",
+ "modified": "2026-06-11 17:06:41.844562",
  "modified_by": "Administrator",
  "module": "Digital Invoicing",
  "name": "HS Uom",
@@ -48,8 +48,19 @@
    "write": 1
   },
   {
+   "create": 1,
+   "delete": 1,
    "read": 1,
-   "role": "All"
+   "role": "Accounts Manager",
+   "write": 1
+  },
+  {
+   "read": 1,
+   "role": "Accounts User"
+  },
+  {
+   "read": 1,
+   "role": "Desk User"
   }
  ],
  "quick_entry": 1,

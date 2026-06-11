@@ -31,7 +31,7 @@
   }
  ],
  "links": [],
- "modified": "2026-05-16 17:14:11.996913",
+ "modified": "2026-06-11 16:57:21.005872",
  "modified_by": "Administrator",
  "module": "Digital Invoicing",
  "name": "HS Code",
@@ -50,8 +50,26 @@
    "write": 1
   },
   {
+   "create": 1,
+   "delete": 1,
    "read": 1,
-   "role": "All"
+   "role": "Accounts Manager",
+   "write": 1
+  },
+  {
+   "create": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Accounts User",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "read": 1,
+   "role": "Desk User"
   }
  ],
  "row_format": "Dynamic",

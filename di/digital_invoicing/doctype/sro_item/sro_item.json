@@ -36,7 +36,7 @@
   }
  ],
  "links": [],
- "modified": "2026-05-16 17:15:54.834855",
+ "modified": "2026-06-11 17:05:01.126748",
  "modified_by": "Administrator",
  "module": "Digital Invoicing",
  "name": "SRO Item",
@@ -53,8 +53,19 @@
    "write": 1
   },
   {
+   "create": 1,
+   "delete": 1,
    "read": 1,
-   "role": "All"
+   "role": "Accounts Manager",
+   "write": 1
+  },
+  {
+   "read": 1,
+   "role": "Accounts User"
+  },
+  {
+   "read": 1,
+   "role": "Desk User"
   }
  ],
  "row_format": "Dynamic",
