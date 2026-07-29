@@ -387,7 +387,7 @@ def _build_invoice_items(doc):
 		tax_data = item_taxes.get(item_code, {})
 		gst = tax_data.get("Sales Tax", {"percentage": 0.0, "amount": 0.0})
 		further_tax = tax_data.get("Further Tax", {"percentage": 0.0, "amount": 0.0})
-		extra_tax = tax_data.get("Advance Tax", {"percentage": 0.0, "amount": 0.0})
+		extra_tax = tax_data.get("Extra Tax", {"percentage": 0.0, "amount": 0.0})
 
 		qty = flt(line.get("qty", 0))
 		value_excl_st = _round_currency(line.get("base_net_amount") or line.get("net_amount", 0))
@@ -414,13 +414,18 @@ def _build_invoice_items(doc):
 
 		sale_type = line.get("di_sale_type") or ""
 
+		product_description = _safe_str(line.get("item_name", ""))
+		row_no = line.get("idx")
+		if row_no:
+			product_description = f"{product_description} (Row {row_no})".strip()
+
 		invoice_item = InvoiceItem(
 			discount=max(_round_currency(discount), 0.0),
 			fedPayable=_round_currency(_as_decimal(line.get("di_fed_payable", 0)) * conversion_rate),
 			furtherTax=further_tax_amt,
 			hsCode=_safe_str(line.get("di_hs_code", "")),
 			extraTax=extra_tax_amt,
-			productDescription=_safe_str(line.get("item_name", "")),
+			productDescription=product_description,
 			quantity=round(qty, 4),
 			rate=_format_rate(gst["percentage"], sale_type),
 			salesTaxApplicable=sales_tax,

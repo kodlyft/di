@@ -74,7 +74,7 @@ On **Sales Taxes and Charges** templates, set the **Tax Type** field to one of:
 
 - `Sales Tax`
 - `Further Tax`
-- `Advance Tax`
+- `Extra Tax`
 
 ### 5. POS Fiscal Setup
 
