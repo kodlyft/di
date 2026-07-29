@@ -387,7 +387,7 @@ def _build_invoice_items(doc):
 		tax_data = item_taxes.get(item_code, {})
 		gst = tax_data.get("Sales Tax", {"percentage": 0.0, "amount": 0.0})
 		further_tax = tax_data.get("Further Tax", {"percentage": 0.0, "amount": 0.0})
-		extra_tax = tax_data.get("Advance Tax", {"percentage": 0.0, "amount": 0.0})
+		extra_tax = tax_data.get("Extra Tax", {"percentage": 0.0, "amount": 0.0})
 
 		qty = flt(line.get("qty", 0))
 		value_excl_st = _round_currency(line.get("base_net_amount") or line.get("net_amount", 0))
