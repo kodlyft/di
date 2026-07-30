@@ -292,7 +292,7 @@ def setup_custom_fields():
 				fieldname="di_tax_type",
 				fieldtype="Select",
 				insert_after="account_head",
-				options="Sales Tax\nFurther Tax\nExtra Tax",
+				options="Sales Tax\nFurther Tax\nExtra Tax\nAdvance Tax",
 				in_list_view=1,
 			),
 		],
